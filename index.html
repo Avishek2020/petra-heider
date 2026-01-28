@@ -19,9 +19,7 @@
             --gold-accent: #d4b982;
             --frame-border: #e2d8c9;
             --shadow: rgba(0, 0, 0, 0.05);
-            /* Subtiler Glow passend zum Screenshot */
             --candle-glow: rgba(255, 185, 80, 0.22); 
-            /* Maße 180x200px */
             --box-width: 180px;
             --box-height: 200px;
         }
@@ -93,7 +91,6 @@
             position: relative;
         }
 
-        /* Rahmendesign */
         .cross-container, .portrait-frame, .candle-box {
             width: var(--box-width);
             height: var(--box-height);
@@ -103,11 +100,6 @@
             overflow: hidden;
         }
 
-        /* Kreuz */
-        .cross-container {
-            background-color: transparent;
-        }
-
         .cross-container img {
             width: 65%;
             height: auto;
@@ -115,7 +107,6 @@
             opacity: 0.6;
         }
 
-        /* Porträt */
         .portrait-frame {
             border: 8px solid #d9cebd; 
             background: #fff;
@@ -131,13 +122,12 @@
             filter: contrast(1.02) saturate(0.95);
         }
 
-        /* Kerze Design nach Vorlage */
         .candle-box {
             background: transparent;
             flex-direction: column;
             justify-content: center;
             cursor: pointer;
-            z-index: 1;
+            z-index: 10;
             position: relative;
         }
 
@@ -149,6 +139,7 @@
             height: 100%;
             padding-bottom: 35px;
             position: relative;
+            pointer-events: none; /* Klicks gehen durch zum candle-box */
         }
 
         .candle-glow-bg {
@@ -166,7 +157,6 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Wavy wick from screenshot (OFF state) */
         .candle-wick-svg {
             width: 20px;
             height: 60px;
@@ -176,7 +166,6 @@
             transform-origin: bottom;
         }
 
-        /* Short straight wick for burning state (ON state) */
         .burning-wick {
             width: 3px;
             height: 12px;
@@ -202,7 +191,6 @@
             pointer-events: none;
         }
 
-        /* Neue Flamme basierend auf image_7c309d.png */
         .flame {
             width: 100%;
             height: 100%;
@@ -211,7 +199,6 @@
             transform-origin: center bottom;
         }
 
-        /* Äußerer warmer Schein der Flamme */
         .flame::before {
             content: '';
             position: absolute;
@@ -220,16 +207,11 @@
             transform: translateX(-50%);
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at bottom, 
-                #ff5e00 0%, 
-                #ff9100 40%, 
-                #ffd700 70%, 
-                transparent 95%);
+            background: radial-gradient(ellipse at bottom, #ff5e00 0%, #ff9100 40%, #ffd700 70%, transparent 95%);
             border-radius: 50% 50% 35% 35%;
             filter: blur(1.5px);
         }
 
-        /* Innerer heller Kern der Flamme */
         .flame::after {
             content: '';
             position: absolute;
@@ -238,10 +220,7 @@
             transform: translateX(-50%);
             width: 45%;
             height: 65%;
-            background: radial-gradient(ellipse at center, 
-                #ffffff 10%, 
-                #fff9d4 60%, 
-                transparent 100%);
+            background: radial-gradient(ellipse at center, #ffffff 10%, #fff9d4 60%, transparent 100%);
             border-radius: 50% 50% 40% 40%;
             filter: blur(0.5px);
         }
@@ -265,7 +244,6 @@
             z-index: 1;
         }
 
-        /* ON State Styling */
         .side-element.is-on .candle-glow-bg { opacity: 1; }
         .side-element.is-on .flame-container { opacity: 1; }
         .side-element.is-on .burning-wick { opacity: 1; }
@@ -290,7 +268,6 @@
             100% { transform: scale(0.98, 1.02) rotate(-0.3deg); opacity: 0.98; }
         }
 
-        /* Text Section */
         .section-box {
             width: 100%;
             max-width: 600px;
@@ -370,19 +347,16 @@
         </header>
 
         <div class="memorial-row">
-            <!-- Kreuz -->
             <div class="side-element">
                 <div class="cross-container">
                     <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/main/photos/cross-03.png" alt="Kreuz">
                 </div>
             </div>
 
-            <!-- Porträt -->
             <div class="portrait-frame">
                 <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/refs/heads/main/photos/1000199784.png" alt="Dr. Petra Heider" class="portrait-image">
             </div>
 
-            <!-- Kerze nach Vorlage -->
             <div class="side-element" id="candleWrapper">
                 <div class="candle-glow-bg"></div>
                 <div class="candle-box" id="candleToggle">
@@ -390,9 +364,7 @@
                         <div class="flame-container">
                             <div class="flame"></div>
                         </div>
-                        <!-- Kurzer Docht beim Brennen -->
                         <div class="burning-wick"></div>
-                        <!-- Gewellter Docht wenn aus -->
                         <svg class="candle-wick-svg" viewBox="0 0 20 60">
                             <path d="M10,60 C10,50 15,45 10,35 C5,25 10,20 10,10" fill="none" stroke="#444" stroke-width="1.8" />
                         </svg>
@@ -437,41 +409,54 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'petra-heider-memorial';
-
+        // Kerzen-Logik sofort initialisieren
         const candleToggle = document.getElementById('candleToggle');
         const candleWrapper = document.getElementById('candleWrapper');
         const candleHint = document.querySelector('.candle-hint');
         let isLit = false;
 
-        candleToggle.addEventListener('click', () => {
-            isLit = !isLit;
-            candleWrapper.classList.toggle('is-on', isLit);
-            candleHint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie, um die Kerze anzuzünden';
-        });
+        if (candleToggle) {
+            candleToggle.addEventListener('click', () => {
+                isLit = !isLit;
+                candleWrapper.classList.toggle('is-on', isLit);
+                candleHint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie, um die Kerze anzuzünden';
+            });
+        }
 
-        const initAuth = async () => {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else {
-                await signInAnonymously(auth);
+        // Firebase-Initialisierung mit Fallback-Prüfung
+        let db, auth, appId;
+        try {
+            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+            if (firebaseConfig) {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'petra-heider-memorial';
+
+                const initAuth = async () => {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                };
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) setupComments();
+                });
+
+                initAuth();
             }
-        };
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) setupComments();
-        });
-
-        initAuth();
+        } catch (e) {
+            console.warn("Firebase konnte nicht geladen werden:", e);
+        }
 
         function setupComments() {
+            if (!db) return;
             const ref = collection(db, 'artifacts', appId, 'public', 'data', 'condolences');
             onSnapshot(ref, (snapshot) => {
                 const list = document.getElementById('commentsList');
+                if (!list) return;
                 list.innerHTML = '';
                 const items = [];
                 snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
@@ -487,22 +472,27 @@
             });
         }
 
-        document.getElementById('condolenceForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const message = document.getElementById('message').value;
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
+        const form = document.getElementById('condolenceForm');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!db || !auth.currentUser) return;
 
-            try {
-                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'condolences'), {
-                    name, message, createdAt: serverTimestamp()
-                });
-                e.target.reset();
-            } finally {
-                btn.disabled = false;
-            }
-        });
+                const name = document.getElementById('name').value;
+                const message = document.getElementById('message').value;
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+
+                try {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'condolences'), {
+                        name, message, createdAt: serverTimestamp()
+                    });
+                    e.target.reset();
+                } finally {
+                    btn.disabled = false;
+                }
+            });
+        }
 
         function escapeHtml(text) {
             const div = document.createElement('div');

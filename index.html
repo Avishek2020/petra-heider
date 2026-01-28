@@ -20,6 +20,7 @@
             --frame-border: #e2d8c9;
             --shadow: rgba(0, 0, 0, 0.05);
             --candle-glow: rgba(255, 185, 80, 0.22); 
+            /* Basis-Maße */
             --box-width: 180px;
             --box-height: 200px;
         }
@@ -33,13 +34,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
             max-width: 1000px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -59,7 +61,7 @@
 
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
             font-weight: 400;
             letter-spacing: 2px;
             margin-bottom: 0.5rem;
@@ -68,19 +70,22 @@
 
         .dates {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-size: clamp(0.9rem, 2vw, 1.4rem);
             font-style: italic;
             color: var(--text-muted);
             letter-spacing: 1px;
         }
 
+        /* Memorial Row - Always horizontal */
         .memorial-row {
             display: flex;
+            flex-direction: row; /* Immer nebeneinander */
             align-items: center;
             justify-content: center;
             gap: 2.5rem;
             width: 100%;
             margin: 2rem 0 3rem 0;
+            flex-wrap: nowrap; /* Kein Umbruch */
         }
 
         .side-element {
@@ -89,8 +94,10 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            flex-shrink: 1;
         }
 
+        /* Responsive scaling for the boxes */
         .cross-container, .portrait-frame, .candle-box {
             width: var(--box-width);
             height: var(--box-height);
@@ -98,20 +105,60 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Scale everything down for small screens while keeping row layout */
+        @media (max-width: 650px) {
+            :root {
+                --box-width: 100px;
+                --box-height: 120px;
+            }
+            .memorial-row {
+                gap: 0.8rem;
+            }
+            .candle-glow-bg {
+                width: 180px !important;
+                height: 180px !important;
+            }
+            .candle-body {
+                width: 28px !important;
+                height: 55px !important;
+            }
+            .flame-container {
+                top: 5px !important;
+                width: 18px !important;
+                height: 35px !important;
+            }
+            .burning-wick {
+                top: 35px !important;
+            }
+            .candle-wick-svg {
+                height: 40px !important;
+            }
+            .candle-hint {
+                font-size: 0.7rem !important;
+                width: 120px !important;
+            }
         }
 
         .cross-container img {
-            width: 65%;
+            width: 94%;
             height: auto;
             object-fit: contain;
             opacity: 0.6;
+            mix-blend-mode: multiply; 
+        }
+
+        .cross-container {
+            background-color: transparent;
         }
 
         .portrait-frame {
-            border: none; /* Rahmen entfernt */
+            border: none; 
             background: transparent;
             padding: 0;
-            box-shadow: none; /* Schatten ebenfalls entfernt für einen sauberen Look */
+            box-shadow: none; 
         }
 
         .portrait-image {
@@ -327,13 +374,6 @@
         }
 
         footer { margin-top: 3rem; text-align: center; color: var(--text-muted); padding-bottom: 2rem; }
-
-        @media (max-width: 850px) {
-            .memorial-row {
-                flex-direction: column;
-                gap: 2rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -409,6 +449,7 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // Kerzen-Logik sofort initialisieren
         const candleToggle = document.getElementById('candleToggle');
         const candleWrapper = document.getElementById('candleWrapper');
         const candleHint = document.querySelector('.candle-hint');

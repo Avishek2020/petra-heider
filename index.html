@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In liebevollem Gedenken - Dr. Petra Heider</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,325 +13,396 @@
         }
 
         :root {
-            --cream: #faf8f3;
-            --dark-brown: #2c1810;
-            --warm-brown: #5a4234;
-            --gold: #c9a55c;
-            --shadow: rgba(44, 24, 16, 0.1);
+            --bg-cream: #fcfaf5;
+            --text-dark: #3a322b;
+            --text-muted: #7a6e65;
+            --gold-accent: #d4b982;
+            --frame-border: #e2d8c9;
+            --shadow: rgba(0, 0, 0, 0.05);
+            /* Subtiler Glow passend zum Screenshot */
+            --candle-glow: rgba(255, 185, 80, 0.22); 
+            /* Maße 180x200px */
+            --box-width: 180px;
+            --box-height: 200px;
         }
 
         body {
             font-family: 'Crimson Text', serif;
-            background: linear-gradient(135deg, #faf8f3 0%, #f5f1e8 100%);
-            color: var(--dark-brown);
-            line-height: 1.45;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
             min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 10px;
             width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            align-items: center;
         }
 
-        @media (min-width: 768px) {
-            .container { padding: 20px; }
+        .top-star {
+            color: var(--gold-accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
         }
 
         header {
             text-align: center;
-            margin-bottom: 0.4rem;
-            padding-top: 0.1rem;
-        }
-
-        .flower-ornament {
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-bottom: 0.1rem;
-            opacity: 0.7;
+            margin-bottom: 2rem;
         }
 
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-            font-weight: 300;
-            letter-spacing: 1.2px;
-            line-height: 1.1;
-            margin-bottom: 0.1rem;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
         }
 
         .dates {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            font-size: clamp(1rem, 2vw, 1.4rem);
             font-style: italic;
-            color: var(--warm-brown);
+            color: var(--text-muted);
             letter-spacing: 1px;
-            margin-bottom: 0.2rem;
         }
 
-        /* Memorial Row Alignment */
         .memorial-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0;
-            height: 200px;
+            gap: 2.5rem;
+            width: 100%;
+            margin: 2rem 0 3rem 0;
         }
 
-        .cross-frame, .portrait-frame {
-            height: 100%;
+        .side-element {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Rahmendesign */
+        .cross-container, .portrait-frame, .candle-box {
+            width: var(--box-width);
+            height: var(--box-height);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: white;
-            padding: 6px;
-            box-shadow: 0 4px 15px var(--shadow);
-            border: 1px solid rgba(201, 165, 92, 0.1);
+            overflow: hidden;
         }
 
-        .cross-frame {
-            width: auto;
-            max-width: 100px;
+        /* Kreuz */
+        .cross-container {
+            background-color: transparent;
         }
 
-        .portrait-frame {
-            max-width: 160px;
-            transform: rotate(-1deg);
-        }
-
-        .memorial-row img {
-            height: 100%;
-            width: auto;
-            display: block;
+        .cross-container img {
+            width: 65%;
+            height: auto;
             object-fit: contain;
-        }
-        
-        .portrait-image {
-            filter: sepia(0.1) contrast(1.02);
+            opacity: 0.6;
         }
 
-        /* Candle Styling */
-        .candle-container {
-            width: 35px;
-            height: 140px; 
-            position: relative;
+        /* Porträt */
+        .portrait-frame {
+            border: 8px solid #d9cebd; 
+            background: #fff;
+            padding: 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .portrait-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; 
+            filter: contrast(1.02) saturate(0.95);
+        }
+
+        /* Kerze Design nach Vorlage */
+        .candle-box {
+            background: transparent;
+            flex-direction: column;
+            justify-content: center;
             cursor: pointer;
-            user-select: none;
+            z-index: 1;
+            position: relative;
+        }
+
+        .candle-inner {
             display: flex;
             flex-direction: column;
+            align-items: center;
             justify-content: flex-end;
-        }
-
-        .candle-svg {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: filter 0.6s ease;
+            height: 100%;
+            padding-bottom: 35px;
             position: relative;
-            z-index: 1;
         }
 
-        .candle-body {
-            fill: #fffdfa;
-            stroke: #e0d0b0;
-            stroke-width: 1;
+        .candle-glow-bg {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, var(--candle-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            pointer-events: none;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Wavy wick from screenshot (OFF state) */
+        .candle-wick-svg {
+            width: 20px;
+            height: 60px;
+            margin-bottom: -15px;
+            opacity: 0.5;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform-origin: bottom;
+        }
+
+        /* Short straight wick for burning state (ON state) */
+        .burning-wick {
+            width: 3px;
+            height: 12px;
+            background: #111;
+            position: absolute;
+            top: 60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 1px;
+            z-index: 4;
         }
 
         .flame-container {
             position: absolute;
-            top: 20px;
+            top: 15px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 18px;
-            height: 45px;
-            z-index: 2;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            width: 28px;
+            height: 52px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 5;
             pointer-events: none;
         }
 
+        /* Neue Flamme basierend auf image_7c309d.png */
         .flame {
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, #fff 0%, #fff000 20%, #ff9100 50%, #ff5e00 80%, rgba(255, 94, 0, 0) 100%);
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 15px #ff9d00, 0 0 25px rgba(255, 234, 0, 0.4);
-            animation: flicker-high 1.1s infinite alternate ease-in-out;
-            filter: blur(0.5px);
+            position: relative;
+            animation: flicker 1.2s infinite alternate ease-in-out;
+            transform-origin: center bottom;
         }
 
+        /* Äußerer warmer Schein der Flamme */
+        .flame::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, 
+                #ff5e00 0%, 
+                #ff9100 40%, 
+                #ffd700 70%, 
+                transparent 95%);
+            border-radius: 50% 50% 35% 35%;
+            filter: blur(1.5px);
+        }
+
+        /* Innerer heller Kern der Flamme */
         .flame::after {
             content: '';
             position: absolute;
-            bottom: 25%;
+            bottom: 15%;
             left: 50%;
             transform: translateX(-50%);
-            width: 5px;
-            height: 15px;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 50%;
-            filter: blur(1px);
+            width: 45%;
+            height: 65%;
+            background: radial-gradient(ellipse at center, 
+                #ffffff 10%, 
+                #fff9d4 60%, 
+                transparent 100%);
+            border-radius: 50% 50% 40% 40%;
+            filter: blur(0.5px);
         }
 
-        .candle-container.is-off .candle-svg { filter: brightness(0.5) grayscale(0.4); }
-        .candle-container.is-off .flame-container { opacity: 0; transform: translateX(-50%) scale(0); }
-
-        .candle-container::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(255,200,80,0.15) 0%, rgba(255,150,0,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 1;
-            transition: opacity 0.8s ease;
-            z-index: 0;
+        .candle-body {
+            width: 46px;
+            height: 90px;
+            background: linear-gradient(to right, #ffffff 0%, #fcfcfc 40%, #f5f5f5 60%, #e8e8e8 100%);
+            border-radius: 1px;
+            position: relative;
+            box-shadow: inset -5px 0 10px rgba(0,0,0,0.03);
+            z-index: 2;
         }
 
-        .candle-container.is-off::before { opacity: 0; }
+        .candle-base {
+            width: 58px;
+            height: 5px;
+            background: #7a6344;
+            border-radius: 1px;
+            margin-top: -1px;
+            z-index: 1;
+        }
 
-        @keyframes flicker-high {
-            0% { transform: scale(1) rotate(-1.5deg); }
-            50% { transform: scale(0.92, 1.25) rotate(1deg); }
-            100% { transform: scale(1.08, 1.35) rotate(-0.5deg); }
+        /* ON State Styling */
+        .side-element.is-on .candle-glow-bg { opacity: 1; }
+        .side-element.is-on .flame-container { opacity: 1; }
+        .side-element.is-on .burning-wick { opacity: 1; }
+        .side-element.is-on .candle-wick-svg { 
+            opacity: 0; 
+            transform: scaleY(0.5) translateY(10px); 
         }
 
         .candle-hint {
-            font-size: 0.65rem;
-            color: var(--warm-brown);
-            text-align: center;
-            margin-top: -0.2rem;
-            margin-bottom: 0.8rem;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
             font-style: italic;
-            opacity: 0.8;
+            text-align: center;
+            width: 280px;
+            line-height: 1.4;
         }
 
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-0.5deg); opacity: 0.95; }
+            50% { transform: scale(1.02, 1.05) rotate(0.8deg); opacity: 1; }
+            100% { transform: scale(0.98, 1.02) rotate(-0.3deg); opacity: 0.98; }
+        }
+
+        /* Text Section */
         .section-box {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 2px;
-            padding: 0.7rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 4px 10px var(--shadow);
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--frame-border);
+            box-shadow: 0 4px 15px var(--shadow);
         }
 
         .bio-text {
-            font-size: 0.9rem;
             text-align: center;
+            font-size: 1.15rem;
             font-style: italic;
-            color: var(--warm-brown);
-            line-height: 1.5;
-            margin-top: -1rem;
+            color: var(--text-muted);
+            border: none;
+            background: transparent;
+            box-shadow: none;
         }
 
         h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.35rem;
-            color: var(--dark-brown);
+            font-size: 1.6rem;
             text-align: center;
-            font-weight: 400;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
-        form { display: grid; gap: 0.35rem; }
-        label { display: block; margin-bottom: 0.1rem; font-size: 0.6rem; text-transform: uppercase; color: var(--warm-brown); }
+        form { display: grid; gap: 1rem; }
+        label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
         input, textarea {
             width: 100%;
-            padding: 6px;
-            border: 1px solid #ddd;
-            background: rgba(255,255,255,0.9);
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            background: #fafafa;
             font-family: inherit;
-            font-size: 0.8rem;
         }
         
         button {
-            width: 100%;
-            background: var(--dark-brown);
+            background: var(--text-dark);
             color: white;
-            padding: 8px;
+            padding: 12px;
             border: none;
             cursor: pointer;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             transition: 0.3s;
         }
-        button:hover { background: var(--warm-brown); }
+        button:hover { background: #554a41; }
 
         .comment-card {
             background: white;
-            padding: 0.6rem;
-            margin-bottom: 0.4rem;
-            border-left: 2px solid var(--gold);
-            box-shadow: 0 2px 5px var(--shadow);
-            font-size: 0.8rem;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--gold-accent);
+            box-shadow: 0 3px 10px var(--shadow);
         }
 
-        .comment-name { font-weight: 600; font-size: 0.9rem; }
-        .comment-date { font-size: 0.65rem; color: #999; margin-bottom: 0.15rem; }
-        
-        footer { 
-            text-align: center; 
-            padding: 0.3rem; 
-            color: var(--warm-brown); 
-            font-style: italic;
-            font-size: 0.7rem;
-        }
+        footer { margin-top: 3rem; text-align: center; color: var(--text-muted); padding-bottom: 2rem; }
 
-        @media (max-width: 480px) {
+        @media (max-width: 850px) {
             .memorial-row {
-                gap: 0.75rem;
-                height: 140px;
+                flex-direction: column;
+                gap: 2rem;
             }
-            .cross-frame { max-width: 60px; }
-            .portrait-frame { max-width: 120px; }
-            .candle-container { width: 25px; height: 110px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="top-star">✦</div>
+        
         <header>
-            <div class="flower-ornament">❧</div>
             <h1>Dr. Petra Heider</h1>
-            <div class="dates">* 23.07.1959 <span class="date-divider"></span> † 23.01.2026</div>
+            <div class="dates">* 21.07.1959 &nbsp; † 23.01.2026</div>
         </header>
 
         <div class="memorial-row">
-            <!-- Updated Cross Image from GitHub -->
-            <div class="cross-frame">
-                <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/main/photos/cross-03.png" alt="Kreuz">
+            <!-- Kreuz -->
+            <div class="side-element">
+                <div class="cross-container">
+                    <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/main/photos/cross-03.png" alt="Kreuz">
+                </div>
             </div>
 
-            <!-- Portrait Frame -->
+            <!-- Porträt -->
             <div class="portrait-frame">
                 <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/refs/heads/main/photos/1000199784.png" alt="Dr. Petra Heider" class="portrait-image">
             </div>
 
-            <!-- Candle Container -->
-            <div class="candle-container" id="candleToggle">
-                <div class="flame-container">
-                    <div class="flame"></div>
+            <!-- Kerze nach Vorlage -->
+            <div class="side-element" id="candleWrapper">
+                <div class="candle-glow-bg"></div>
+                <div class="candle-box" id="candleToggle">
+                    <div class="candle-inner">
+                        <div class="flame-container">
+                            <div class="flame"></div>
+                        </div>
+                        <!-- Kurzer Docht beim Brennen -->
+                        <div class="burning-wick"></div>
+                        <!-- Gewellter Docht wenn aus -->
+                        <svg class="candle-wick-svg" viewBox="0 0 20 60">
+                            <path d="M10,60 C10,50 15,45 10,35 C5,25 10,20 10,10" fill="none" stroke="#444" stroke-width="1.8" />
+                        </svg>
+                        <div class="candle-body"></div>
+                        <div class="candle-base"></div>
+                    </div>
                 </div>
-                <svg class="candle-svg" viewBox="0 0 100 300" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="48" y="20" width="4" height="15" fill="#222" />
-                    <path class="candle-body" d="M25,40 Q25,35 35,35 L65,35 Q75,35 75,40 L75,285 Q75,295 50,295 Q25,295 25,285 Z" />
-                </svg>
+                <p class="candle-hint">Klicken Sie, um die Kerze anzuzünden</p>
             </div>
         </div>
-        
-        <p class="candle-hint">Klicken Sie auf die Kerze, um sie zu löschen</p>
 
         <section class="section-box bio-text">
             <p>Wo Liebe verweilt, endet nichts.</p>
@@ -342,49 +413,102 @@
             <h2>Gedenken & Kondolenz</h2>
             <form id="condolenceForm">
                 <div>
-                    <label>Ihr Name</label>
+                    <label for="name">Ihr Name</label>
                     <input type="text" id="name" required>
                 </div>
                 <div>
-                    <label>Ihre Botschaft</label>
-                    <textarea id="message" rows="2" required></textarea>
+                    <label for="message">Ihre Botschaft</label>
+                    <textarea id="message" rows="4" required></textarea>
                 </div>
-                <button type="submit">Nachricht teilen</button>
+                <button type="submit" id="submitBtn">Nachricht teilen</button>
             </form>
         </section>
 
-        <div id="commentsList"></div>
+        <div id="commentsList" style="width: 100%; max-width: 600px;"></div>
 
         <footer>
-            <div class="flower-ornament">❧</div>
+            <div class="top-star">✦</div>
             <p>Immer in unseren Gedanken.</p>
         </footer>
     </div>
 
-    <script>
-        const candle = document.getElementById('candleToggle');
-        const hint = document.querySelector('.candle-hint');
-        let isLit = true;
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        candle.addEventListener('click', () => {
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'petra-heider-memorial';
+
+        const candleToggle = document.getElementById('candleToggle');
+        const candleWrapper = document.getElementById('candleWrapper');
+        const candleHint = document.querySelector('.candle-hint');
+        let isLit = false;
+
+        candleToggle.addEventListener('click', () => {
             isLit = !isLit;
-            candle.classList.toggle('is-off', !isLit);
-            hint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie auf die Kerze, um sie zu entzünden';
+            candleWrapper.classList.toggle('is-on', isLit);
+            candleHint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie, um die Kerze anzuzünden';
         });
 
-        const form = document.getElementById('condolenceForm');
-        form.addEventListener('submit', (e) => {
+        const initAuth = async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) setupComments();
+        });
+
+        initAuth();
+
+        function setupComments() {
+            const ref = collection(db, 'artifacts', appId, 'public', 'data', 'condolences');
+            onSnapshot(ref, (snapshot) => {
+                const list = document.getElementById('commentsList');
+                list.innerHTML = '';
+                const items = [];
+                snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
+                items.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                
+                items.forEach(data => {
+                    const card = document.createElement('div');
+                    card.className = 'comment-card';
+                    const date = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('de-DE') : 'Gerade eben';
+                    card.innerHTML = `<strong>${escapeHtml(data.name)}</strong> <small style="color: #999; float: right">${date}</small><p style="margin-top: 5px">${escapeHtml(data.message)}</p>`;
+                    list.appendChild(card);
+                });
+            });
+        }
+
+        document.getElementById('condolenceForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('name').value;
-            const text = document.getElementById('message').value;
-            const date = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+            const message = document.getElementById('message').value;
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
 
-            const card = document.createElement('div');
-            card.className = 'comment-card';
-            card.innerHTML = `<div class="comment-name">${name}</div><div class="comment-date">${date}</div><div>${text}</div>`;
-            document.getElementById('commentsList').prepend(card);
-            form.reset();
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'condolences'), {
+                    name, message, createdAt: serverTimestamp()
+                });
+                e.target.reset();
+            } finally {
+                btn.disabled = false;
+            }
         });
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
     </script>
 </body>
 </html>

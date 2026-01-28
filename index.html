@@ -81,7 +81,6 @@
             padding: 15px;
             background: white;
             box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(201, 165, 92, 0.2);
             transform: rotate(-1deg);
             transition: transform 0.5s ease;
             display: flex;
@@ -97,10 +96,11 @@
             filter: sepia(0.15) contrast(1.05);
         }
 
-        /* High Candle Styling */
+        /* Candle Styling */
         .candle-wrapper {
             text-align: center;
-            margin: 4rem 0;
+            /* Increased margin-top by ~10mm (approx 2.5rem) to move it lower */
+            margin: 8.5rem 0 4rem 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -130,7 +130,6 @@
             stroke-width: 1;
         }
 
-        /* High Flickering Flame */
         .flame-container {
             position: absolute;
             top: -70px;
@@ -275,7 +274,7 @@
         </header>
 
         <div class="portrait-frame">
-            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=600" alt="Gedenkfoto" class="portrait-image">
+            <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/refs/heads/main/photos/1000199784.png" alt="Gedenkfoto Dr. Petra Heider" class="portrait-image">
         </div>
 
         <div class="candle-wrapper">
@@ -288,7 +287,7 @@
                     <path class="candle-body" d="M25,40 Q25,35 35,35 L65,35 Q75,35 75,40 L75,285 Q75,295 50,295 Q25,295 25,285 Z" />
                 </svg>
             </div>
-            <p class="candle-hint">Klicken Sie auf die Kerze, um sie zu entzünden</p>
+            <p class="candle-hint">Klicken Sie auf die Kerze, um sie zu löschen</p>
         </div>
 
         <section class="section-box bio-text">
@@ -314,7 +313,7 @@
         <div id="commentsList"></div>
 
         <footer>
-            <div class="flower-ornament">❦</div>
+            <div class="flower-ornament">❧</div>
             <p>Immer in unseren Gedanken.</p>
         </footer>
     </div>

@@ -108,10 +108,10 @@
         }
 
         .portrait-frame {
-            border: 8px solid #d9cebd; 
-            background: #fff;
+            border: none; /* Rahmen entfernt */
+            background: transparent;
             padding: 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: none; /* Schatten ebenfalls entfernt für einen sauberen Look */
         }
 
         .portrait-image {
@@ -139,7 +139,7 @@
             height: 100%;
             padding-bottom: 35px;
             position: relative;
-            pointer-events: none; /* Klicks gehen durch zum candle-box */
+            pointer-events: none;
         }
 
         .candle-glow-bg {
@@ -409,7 +409,6 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Kerzen-Logik sofort initialisieren
         const candleToggle = document.getElementById('candleToggle');
         const candleWrapper = document.getElementById('candleWrapper');
         const candleHint = document.querySelector('.candle-hint');
@@ -423,7 +422,6 @@
             });
         }
 
-        // Firebase-Initialisierung mit Fallback-Prüfung
         let db, auth, appId;
         try {
             const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;

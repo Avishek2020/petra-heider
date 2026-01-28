@@ -20,9 +20,9 @@
             --frame-border: #e2d8c9;
             --shadow: rgba(0, 0, 0, 0.05);
             --candle-glow: rgba(255, 185, 80, 0.22); 
-            /* Basis-Maße */
-            --box-width: 180px;
-            --box-height: 200px;
+            /* Reduzierte Maße für eine kompaktere Darstellung */
+            --box-width: 120px;
+            --box-height: 140px;
         }
 
         body {
@@ -79,13 +79,13 @@
         /* Memorial Row - Always horizontal */
         .memorial-row {
             display: flex;
-            flex-direction: row; /* Immer nebeneinander */
+            flex-direction: row; 
             align-items: center;
             justify-content: center;
-            gap: 2.5rem;
+            gap: 2rem;
             width: 100%;
-            margin: 2rem 0 3rem 0;
-            flex-wrap: nowrap; /* Kein Umbruch */
+            margin: 1.5rem 0 2.5rem 0;
+            flex-wrap: nowrap; 
         }
 
         .side-element {
@@ -108,42 +108,44 @@
             transition: all 0.3s ease;
         }
 
-        /* Scale everything down for small screens while keeping row layout */
+        /* Scale down for mobile while keeping row layout */
         @media (max-width: 650px) {
             :root {
-                --box-width: 100px;
-                --box-height: 120px;
+                --box-width: 70px;
+                --box-height: 85px;
             }
             .memorial-row {
-                gap: 0.8rem;
+                gap: 0.6rem;
             }
             .candle-glow-bg {
-                width: 180px !important;
-                height: 180px !important;
+                width: 130px !important;
+                height: 130px !important;
             }
             .candle-body {
-                width: 28px !important;
-                height: 55px !important;
+                width: 18px !important;
+                height: 38px !important;
             }
             .flame-container {
-                top: 5px !important;
-                width: 18px !important;
-                height: 35px !important;
+                top: 4px !important;
+                width: 12px !important;
+                height: 24px !important;
             }
             .burning-wick {
-                top: 35px !important;
+                top: 24px !important;
+                width: 2px !important;
+                height: 6px !important;
             }
             .candle-wick-svg {
-                height: 40px !important;
+                height: 28px !important;
             }
             .candle-hint {
-                font-size: 0.7rem !important;
-                width: 120px !important;
+                font-size: 0.6rem !important;
+                width: 80px !important;
             }
         }
 
         .cross-container img {
-            width: 94%;
+            width: 90%;
             height: auto;
             object-fit: contain;
             opacity: 0.6;
@@ -184,15 +186,15 @@
             align-items: center;
             justify-content: flex-end;
             height: 100%;
-            padding-bottom: 35px;
+            padding-bottom: 25px;
             position: relative;
             pointer-events: none;
         }
 
         .candle-glow-bg {
             position: absolute;
-            width: 320px;
-            height: 320px;
+            width: 240px;
+            height: 240px;
             background: radial-gradient(circle, var(--candle-glow) 0%, transparent 70%);
             border-radius: 50%;
             z-index: 0;
@@ -205,20 +207,20 @@
         }
 
         .candle-wick-svg {
-            width: 20px;
-            height: 60px;
-            margin-bottom: -15px;
+            width: 15px;
+            height: 45px;
+            margin-bottom: -10px;
             opacity: 0.5;
             transition: opacity 0.4s ease, transform 0.4s ease;
             transform-origin: bottom;
         }
 
         .burning-wick {
-            width: 3px;
-            height: 12px;
+            width: 2.5px;
+            height: 8px;
             background: #111;
             position: absolute;
-            top: 60px;
+            top: 45px;
             opacity: 0;
             transition: opacity 0.3s;
             border-radius: 1px;
@@ -227,11 +229,11 @@
 
         .flame-container {
             position: absolute;
-            top: 15px; 
+            top: 10px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 28px;
-            height: 52px;
+            width: 20px;
+            height: 38px;
             opacity: 0;
             transition: opacity 0.5s ease;
             z-index: 5;
@@ -256,7 +258,7 @@
             height: 100%;
             background: radial-gradient(ellipse at bottom, #ff5e00 0%, #ff9100 40%, #ffd700 70%, transparent 95%);
             border-radius: 50% 50% 35% 35%;
-            filter: blur(1.5px);
+            filter: blur(1.2px);
         }
 
         .flame::after {
@@ -269,22 +271,22 @@
             height: 65%;
             background: radial-gradient(ellipse at center, #ffffff 10%, #fff9d4 60%, transparent 100%);
             border-radius: 50% 50% 40% 40%;
-            filter: blur(0.5px);
+            filter: blur(0.4px);
         }
 
         .candle-body {
-            width: 46px;
-            height: 90px;
+            width: 32px;
+            height: 65px;
             background: linear-gradient(to right, #ffffff 0%, #fcfcfc 40%, #f5f5f5 60%, #e8e8e8 100%);
             border-radius: 1px;
             position: relative;
-            box-shadow: inset -5px 0 10px rgba(0,0,0,0.03);
+            box-shadow: inset -3px 0 7px rgba(0,0,0,0.03);
             z-index: 2;
         }
 
         .candle-base {
-            width: 58px;
-            height: 5px;
+            width: 40px;
+            height: 4px;
             background: #7a6344;
             border-radius: 1px;
             margin-top: -1px;
@@ -300,13 +302,13 @@
         }
 
         .candle-hint {
-            margin-top: 15px;
-            font-size: 0.9rem;
+            margin-top: 10px;
+            font-size: 0.8rem;
             color: var(--text-muted);
             font-style: italic;
             text-align: center;
-            width: 280px;
-            line-height: 1.4;
+            width: 200px;
+            line-height: 1.3;
         }
 
         @keyframes flicker {
@@ -319,15 +321,15 @@
             width: 100%;
             max-width: 600px;
             background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             border: 1px solid var(--frame-border);
-            box-shadow: 0 4px 15px var(--shadow);
+            box-shadow: 0 4px 12px var(--shadow);
         }
 
         .bio-text {
             text-align: center;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-style: italic;
             color: var(--text-muted);
             border: none;
@@ -337,17 +339,17 @@
 
         h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             font-weight: 500;
         }
 
-        form { display: grid; gap: 1rem; }
+        form { display: grid; gap: 0.8rem; }
         label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
         input, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #e0e0e0;
             background: #fafafa;
             font-family: inherit;
@@ -356,7 +358,7 @@
         button {
             background: var(--text-dark);
             color: white;
-            padding: 12px;
+            padding: 10px;
             border: none;
             cursor: pointer;
             font-family: 'Cormorant Garamond', serif;
@@ -367,13 +369,13 @@
 
         .comment-card {
             background: white;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
             border-left: 3px solid var(--gold-accent);
-            box-shadow: 0 3px 10px var(--shadow);
+            box-shadow: 0 2px 8px var(--shadow);
         }
 
-        footer { margin-top: 3rem; text-align: center; color: var(--text-muted); padding-bottom: 2rem; }
+        footer { margin-top: 2rem; text-align: center; color: var(--text-muted); padding-bottom: 2rem; }
     </style>
 </head>
 <body>
@@ -449,7 +451,6 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Kerzen-Logik sofort initialisieren
         const candleToggle = document.getElementById('candleToggle');
         const candleWrapper = document.getElementById('candleWrapper');
         const candleHint = document.querySelector('.candle-hint');

@@ -99,7 +99,6 @@
         /* Candle Styling */
         .candle-wrapper {
             text-align: center;
-            /* Increased margin-top by ~10mm (approx 2.5rem) to move it lower */
             margin: 8.5rem 0 4rem 0;
             display: flex;
             flex-direction: column;
@@ -278,7 +277,8 @@
         </div>
 
         <div class="candle-wrapper">
-            <div class="candle-container" id="candleToggle">
+            <!-- Added 'is-off' class initially -->
+            <div class="candle-container is-off" id="candleToggle">
                 <div class="flame-container">
                     <div class="flame"></div>
                 </div>
@@ -287,7 +287,8 @@
                     <path class="candle-body" d="M25,40 Q25,35 35,35 L65,35 Q75,35 75,40 L75,285 Q75,295 50,295 Q25,295 25,285 Z" />
                 </svg>
             </div>
-            <p class="candle-hint">Klicken Sie auf die Kerze, um sie zu löschen</p>
+            <!-- Updated text to match initial OFF state -->
+            <p class="candle-hint">Klicken Sie auf die Kerze, um sie zu entzünden</p>
         </div>
 
         <section class="section-box bio-text">
@@ -321,7 +322,8 @@
     <script>
         const candle = document.getElementById('candleToggle');
         const hint = document.querySelector('.candle-hint');
-        let isLit = true;
+        // Set initial state to false (OFF)
+        let isLit = false;
 
         candle.addEventListener('click', () => {
             isLit = !isLit;

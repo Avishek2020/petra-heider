@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In liebevollem Gedenken - Dr. Petra Heider</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Merriweather:wght@400;700&family=Quicksand:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,7 +16,7 @@
         }
 
         :root {
-            --bg-cream: #fdfaf5; 
+            --bg-cream: #fdfaf5;
             --dark-brown: #4a443f;
             --warm-brown: #7a736d;
             --gold: #c9a55c;
@@ -31,9 +34,12 @@
             flex-direction: column;
             align-items: center;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         .container {
+            position: relative;
+            z-index: 1;
             max-width: 1000px;
             width: 100%;
             padding: 3rem 1.5rem;
@@ -49,47 +55,73 @@
         .top-ornament {
             color: var(--gold);
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.1rem;
+            line-height: 1;
         }
 
         h1 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Merriweather', serif;
             font-size: clamp(2.8rem, 10vw, 4.2rem);
             font-weight: 400;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.1rem;
             color: var(--dark-brown);
+            line-height: 1.1;
         }
 
         .dates {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 1.4rem;
-            font-style: italic;
+            font-style: normal;
             color: var(--warm-brown);
             margin-bottom: 1rem;
         }
 
-        /* Memorial Row Layout - Moved significantly higher as requested */
+        /* Memorial Row Layout */
+        /* Memorial Row Layout */
         .memorial-row {
-            display: flex;
-            align-items: flex-end; 
-            justify-content: center;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            align-items: center;
             width: 100%;
-            max-width: 600px;
-            /* Negative margin increased to -3.5rem to move it "10% more up" */
-            margin: -3.5rem auto 0.5rem auto; 
-            min-height: 180px;
+            max-width: 900px;
+            margin: -0.5rem auto 2rem auto;
             gap: 3rem;
         }
 
         .item-cell {
             display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Align left cell content to center */
+        .item-cell:first-child {
             justify-content: center;
-            align-items: flex-end;
+        }
+
+        /* Align center cell content to center */
+        .item-cell:nth-child(2) {
+            justify-content: center;
+        }
+
+        /* Align right cell content to center */
+        .item-cell:last-child {
+            justify-content: center;
+        }
+
+        .item-cell-candle {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .item-cell-candle .hint {
+            margin-top: 0.25rem;
+            margin-bottom: 0;
         }
 
         .portrait-frame {
             position: relative;
-            width: clamp(130px, 22vw, 190px);
+            width: clamp(180px, 25vw, 260px);
             mix-blend-mode: multiply;
             filter: contrast(1.05) brightness(1.02);
             display: block;
@@ -102,64 +134,80 @@
             width: 100%;
             height: auto;
             display: block;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cross Styling */
+        .cross-img {
+            height: clamp(220px, 35vw, 320px);
+            width: auto;
+            opacity: 0.6;
+            filter: sepia(0.3);
         }
 
         /* Candle Styling */
         .candle-container {
-            width: clamp(15px, 3vw, 22px);
-            height: clamp(63px, 10.8vw, 90px);
+            width: clamp(50px, 10vw, 70px);
+            height: clamp(220px, 35vw, 320px);
             position: relative;
             cursor: pointer;
             user-select: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
             transition: transform 0.2s ease;
-            margin-bottom: 25px; 
+            margin-bottom: 0;
         }
-        
+
         .candle-container:hover {
             transform: scale(1.05);
         }
 
         .candle-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             width: 100%;
-            height: 70%;
+            height: calc(100% - 44px);
             background: #fff;
-            border: 1px solid #eee;
-            border-radius: 2px 2px 1px 1px;
-            position: relative;
-            box-shadow: inset -1px 0 3px rgba(0,0,0,0.02);
+            border: 1px solid #dcd6ce;
+            border-radius: 4px;
+            box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.03), 0 5px 10px rgba(0, 0, 0, 0.05);
         }
 
         .wick {
-            width: 1px;
-            height: 6px;
-            background: #333;
+            width: 2px;
+            height: 12px;
+            background: #4a443f;
             position: absolute;
-            top: -6px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
+            z-index: 1;
         }
 
         .flame {
             position: absolute;
-            top: -28px;
+            top: -44px;
+            /* 12px wick + 32px flame: base of flame sits on wick tip */
             left: 50%;
             transform: translateX(-50%);
-            width: 12px;
-            height: 24px;
+            width: 16px;
+            height: 32px;
             background: linear-gradient(to bottom, #fff 0%, #ffeb3b 20%, #ff9800 60%, #f44336 90%);
             border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 10px #ff9800, 0 0 20px rgba(255, 152, 0, 0.4);
+            box-shadow: 0 0 15px #ff9800, 0 0 30px rgba(255, 152, 0, 0.5);
             animation: flicker 1.2s infinite alternate ease-in-out;
             transition: opacity 0.5s ease, transform 0.5s ease;
             z-index: 2;
         }
 
         @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1) rotate(-1deg); }
-            100% { transform: translateX(-50%) scale(1.08) rotate(1deg); }
+            0% {
+                transform: translateX(-50%) scale(1) rotate(-1deg);
+            }
+
+            100% {
+                transform: translateX(-50%) scale(1.1) rotate(1deg);
+            }
         }
 
         .is-off .flame {
@@ -176,7 +224,7 @@
         .hint {
             font-size: 0.9rem;
             color: var(--warm-brown);
-            font-style: italic;
+            font-style: normal;
             text-align: center;
             margin-top: 0.2rem;
             margin-bottom: 2rem;
@@ -185,6 +233,7 @@
 
         /* Sections */
         .section-card {
+            font-family: 'Times New Roman', Times, serif;
             margin-top: 1rem;
             padding: 2rem 1rem;
             border-top: 1px solid var(--frame-border);
@@ -195,8 +244,9 @@
         }
 
         .quote-text {
+            font-family: 'Quicksand', sans-serif;
             text-align: center;
-            font-style: italic;
+            font-style: normal;
             font-size: 1.2rem;
             color: var(--warm-brown);
             margin-bottom: 2rem;
@@ -204,7 +254,7 @@
         }
 
         h2 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Merriweather', serif;
             font-size: 1.8rem;
             margin-bottom: 1.5rem;
             text-align: center;
@@ -230,11 +280,12 @@
             letter-spacing: 1px;
         }
 
-        input, textarea {
+        input,
+        textarea {
             padding: 0.9rem;
             border: 1px solid var(--frame-border);
             background: white;
-            font-family: inherit;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 1rem;
             border-radius: 4px;
         }
@@ -244,7 +295,7 @@
             color: white;
             border: none;
             padding: 1rem;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 1.2rem;
             cursor: pointer;
             transition: 0.3s;
@@ -260,12 +311,13 @@
         }
 
         .comment-item {
+            font-family: 'Times New Roman', Times, serif;
             background: white;
             padding: 1.5rem;
             margin-bottom: 1rem;
             border: 1px solid var(--frame-border);
             border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
         }
 
         .comment-meta {
@@ -286,6 +338,7 @@
         }
 
         footer {
+            font-family: 'Times New Roman', Times, serif;
             margin-top: 2rem;
             padding: 3rem;
             text-align: center;
@@ -294,51 +347,244 @@
             font-size: 1rem;
         }
 
-        @media (max-width: 480px) {
+        /* Mobile & tablet */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 9vw, 3rem);
+            }
+
+            .dates {
+                font-size: 1.1rem;
+            }
+
+            .quote-text {
+                font-size: 1.05rem;
+                margin-bottom: 1.5rem;
+                padding: 0 0.5rem;
+            }
+
+            .quote-text p {
+                margin-bottom: 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .section-card {
+                padding: 1.5rem 1rem;
+            }
+
+            input,
+            textarea {
+                padding: 0.85rem;
+                font-size: 16px;
+            }
+
+            .submit-btn {
+                padding: 0.9rem 1rem;
+                font-size: 1.1rem;
+                min-height: 48px;
+            }
+
+            .comment-item {
+                padding: 1.2rem 1rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 600px) {
             .memorial-row {
-                min-height: 160px;
-                gap: 2rem;
-                align-items: flex-end;
-                margin-top: -3rem;
+                align-items: center;
+                gap: 1rem;
+                margin: 0 auto 1.5rem auto;
+                max-width: 100%;
+            }
+
+            .memorial-row .item-cell {
+                align-items: center;
+            }
+
+            .cross-img {
+                height: clamp(140px, 42vw, 200px);
+            }
+
+            .portrait-frame {
+                width: clamp(140px, 42vw, 200px);
+            }
+
+            .candle-container {
+                width: clamp(36px, 10vw, 48px);
+                height: clamp(140px, 42vw, 200px);
+            }
+
+            .hint {
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem 0.75rem;
+            }
+
+            .top-ornament {
+                font-size: 1.25rem;
+            }
+
+            h1 {
+                font-size: 1.85rem;
+            }
+
+            .dates {
+                font-size: 1rem;
+            }
+
+            .memorial-row {
+                gap: 0.75rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .cross-img {
+                height: 140px;
+            }
+
+            .portrait-frame {
+                width: 140px;
+            }
+
+            .candle-container {
+                width: 32px;
+                height: 140px;
+            }
+
+            .quote-text {
+                font-size: 1rem;
+            }
+
+            .section-card {
+                padding: 1.25rem 0.75rem;
+            }
+
+            .comment-item {
+                padding: 1rem 0.75rem;
+            }
+
+            .comment-text {
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 1.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .leaf {
+                max-width: 20px;
+                max-height: 20px;
+            }
+        }
+
+        /* Falling leaves */
+        .leaves-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            transform-origin: center center;
+            animation: fall linear infinite;
+        }
+
+        .leaf img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10%) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(25vh) translateX(15px) rotate(90deg);
+            }
+            50% {
+                transform: translateY(50vh) translateX(-10px) rotate(180deg);
+            }
+            75% {
+                transform: translateY(75vh) translateX(12px) rotate(270deg);
+            }
+            100% {
+                transform: translateY(110vh) translateX(0) rotate(360deg);
             }
         }
     </style>
 </head>
+
 <body>
+
+    <div class="leaves-container" id="leavesContainer" aria-hidden="true"></div>
 
     <div class="container">
         <header>
             <div class="top-ornament">✦</div>
             <h1>Dr. Petra Heider</h1>
             <div class="dates">
-                * 21.07.1959 &nbsp; † 23.01.2026
+                * 23.07.1959 &nbsp; † 23.01.2026
             </div>
         </header>
 
         <div class="memorial-row">
+            <!-- Cross Section -->
+            <div class="item-cell">
+                <img src="./photos/cross-no-bg-1.png" alt="Cross" class="cross-img">
+            </div>
+
             <!-- Portrait Section -->
             <div class="item-cell">
                 <div class="portrait-frame">
-                    <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/refs/heads/main/photos/1000199784.png" alt="Dr. Petra Heider">
+                    <img src="./photos/1000199783.png" alt="Dr. Petra Heider">
                 </div>
             </div>
 
             <!-- Candle Section -->
-            <div class="item-cell">
+            <div class="item-cell item-cell-candle">
                 <div class="candle-container is-off" id="candleToggle">
-                    <div class="flame"></div>
                     <div class="candle-body">
                         <div class="wick"></div>
+                        <div class="flame"></div>
                     </div>
                 </div>
+                <p class="hint" id="candleHint">Kerzen anzuzünden</p>
             </div>
         </div>
 
-        <p class="hint" id="candleHint">Klicken Sie, um die Kerze anzuzünden</p>
-
         <section class="quote-text">
-            <p>"Wo Liebe verweilt, endet nichts."</p>
-            <p>Ihr Licht begleitet uns – still und ewig spürbar im Herzen.</p>
+            <p>Wo Liebe verweilt, endet nichts.</p>
+            <p>Ihr Licht begleitet uns –</p>
+            <p>leise, unsichtbar für die Augen,</p>
+            <p>aber ewig spürbar im Herzen.</p>
         </section>
 
         <section class="section-card">
@@ -347,6 +593,10 @@
                 <div class="input-group">
                     <label>Ihr Name</label>
                     <input type="text" id="name" required>
+                </div>
+                <div class="input-group">
+                    <label>Ort</label>
+                    <input type="text" id="ort" placeholder="">
                 </div>
                 <div class="input-group">
                     <label>Ihre Worte</label>
@@ -364,44 +614,145 @@
     </div>
 
     <script>
+        (function initLeaves() {
+            const container = document.getElementById('leavesContainer');
+            if (!container) return;
+            const leafCount = 18;
+            for (let i = 0; i < leafCount; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                const img = document.createElement('img');
+                img.src = './photos/leaf.png';
+                img.alt = '';
+                leaf.appendChild(img);
+                leaf.style.left = Math.random() * 100 + '%';
+                const duration = 12 + Math.random() * 14;
+                leaf.style.animationDuration = duration + 's';
+                leaf.style.animationDelay = -(Math.random() * duration) + 's';
+                leaf.style.width = (18 + Math.random() * 16) + 'px';
+                leaf.style.height = (18 + Math.random() * 16) + 'px';
+                container.appendChild(leaf);
+            }
+        })();
+
         const candle = document.getElementById('candleToggle');
         const hint = document.getElementById('candleHint');
         let isLit = false;
 
+        const memorialRow = candle.closest('.memorial-row');
+
         candle.addEventListener('click', () => {
             isLit = !isLit;
             candle.classList.toggle('is-off', !isLit);
-            hint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie, um die Kerze anzuzünden';
+            memorialRow.classList.toggle('candle-lit', isLit);
+            hint.textContent = isLit ? '' : 'Kerzen anzuzünden';
         });
 
         const form = document.getElementById('condolenceForm');
         const list = document.getElementById('commentsList');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const message = document.getElementById('message').value;
-            const date = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
-
-            const item = document.createElement('div');
-            item.className = 'comment-item';
-            item.innerHTML = `
-                <div class="comment-meta">
-                    <span class="comment-author">${escapeHtml(name)}</span>
-                    <span>${date}</span>
-                </div>
-                <div class="comment-text">${escapeHtml(message)}</div>
-            `;
-            list.prepend(item);
-            form.reset();
-        });
+        const STORAGE_KEY = 'petra-heider-condolences';
 
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
+
+        function renderMessage(msg) {
+            const item = document.createElement('div');
+            item.className = 'comment-item';
+            const ortStr = (msg.ort != null && String(msg.ort).trim()) ? String(msg.ort).trim() : '';
+            const ortHtml = ortStr ? ` · ${escapeHtml(ortStr)}` : '';
+            item.innerHTML = `
+                <div class="comment-meta">
+                    <span class="comment-author">${escapeHtml(msg.name)}</span>${ortHtml}
+                    <span> · ${msg.date || ''}</span>
+                </div>
+                <div class="comment-text">${escapeHtml(msg.message)}</div>
+            `;
+            return item;
+        }
+
+        function getLocalMessages() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function saveLocalMessage(msg) {
+            const messages = getLocalMessages();
+            messages.unshift(msg);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+        }
+
+        async function loadMessages() {
+            list.innerHTML = '';
+            let fromServer = [];
+            try {
+                const res = await fetch('/api/messages');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data)) fromServer = data;
+                }
+            } catch (err) {
+                try {
+                    const res = await fetch('messages.json');
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (Array.isArray(data)) fromServer = data;
+                    }
+                } catch (e) {}
+            }
+            const local = getLocalMessages();
+            const combined = [...fromServer, ...local];
+            combined.forEach(msg => list.appendChild(renderMessage(msg)));
+        }
+
+        loadMessages();
+
+        const submitBtn = form.querySelector('.submit-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const ort = document.getElementById('ort').value.trim();
+            const message = document.getElementById('message').value.trim();
+            if (!name || !message) return;
+
+            const date = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+            const newMsg = { name, ort, message, date };
+
+            const prevText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wird gesendet…';
+
+            try {
+                const res = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, ort, message })
+                });
+                if (res.ok) {
+                    const saved = await res.json();
+                    list.prepend(renderMessage(saved));
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = prevText;
+                    return;
+                }
+            } catch (err) {}
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = prevText;
+            saveLocalMessage(newMsg);
+            list.prepend(renderMessage(newMsg));
+            form.reset();
+            alert('Nachricht nur in diesem Browser gespeichert. Um in messages.json zu speichern: Im Projektordner "npm start" ausführen und die Seite unter http://localhost:3001 öffnen (nicht die HTML-Datei direkt öffnen).');
+        });
     </script>
 </body>
-</html>
 
+</html>

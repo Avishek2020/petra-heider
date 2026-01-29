@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In liebevollem Gedenken - Dr. Petra Heider</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,45 +13,33 @@
         }
 
         :root {
-            --bg-cream: #fcfaf5;
-            --text-dark: #3a322b;
-            --text-muted: #7a6e65;
-            --gold-accent: #d4b982;
-            --frame-border: #e2d8c9;
-            --shadow: rgba(0, 0, 0, 0.05);
-            --candle-glow: rgba(255, 185, 80, 0.22); 
-            /* Reduzierte Maße für eine kompaktere Darstellung */
-            --box-width: 120px;
-            --box-height: 140px;
+            /* Updated background color to perfectly match the photo's warm tones */
+            --bg-cream: #fdfaf5; 
+            --dark-brown: #4a443f;
+            --warm-brown: #7a736d;
+            --gold: #c9a55c;
+            --frame-border: #dcd6ce;
+            --white: #ffffff;
         }
 
         body {
             font-family: 'Crimson Text', serif;
             background-color: var(--bg-cream);
-            color: var(--text-dark);
+            color: var(--dark-brown);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            width: 100%;
             max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px 10px;
+            width: 100%;
+            padding: 3rem 1.5rem;
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-
-        .top-star {
-            color: var(--gold-accent);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.8;
         }
 
         header {
@@ -59,480 +47,355 @@
             margin-bottom: 2rem;
         }
 
+        .top-ornament {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-size: clamp(2.8rem, 10vw, 4.2rem);
             font-weight: 400;
-            letter-spacing: 2px;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            color: var(--dark-brown);
         }
 
         .dates {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(0.9rem, 2vw, 1.4rem);
+            font-size: 1.4rem;
             font-style: italic;
-            color: var(--text-muted);
-            letter-spacing: 1px;
+            color: var(--warm-brown);
+            margin-bottom: 2.5rem;
         }
 
-        /* Memorial Row - Always horizontal */
+        /* Memorial Row Layout */
         .memorial-row {
             display: flex;
-            flex-direction: row; 
             align-items: center;
             justify-content: center;
-            gap: 2rem;
             width: 100%;
-            margin: 1.5rem 0 2.5rem 0;
-            flex-wrap: nowrap; 
+            max-width: 700px;
+            margin: 2rem auto;
+            min-height: 320px;
+            gap: 4rem;
         }
 
-        .side-element {
+        .item-cell {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            position: relative;
-            flex-shrink: 1;
-        }
-
-        /* Responsive scaling for the boxes */
-        .cross-container, .portrait-frame, .candle-box {
-            width: var(--box-width);
-            height: var(--box-height);
-            display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        /* Scale down for mobile while keeping row layout */
-        @media (max-width: 650px) {
-            :root {
-                --box-width: 70px;
-                --box-height: 85px;
-            }
-            .memorial-row {
-                gap: 0.6rem;
-            }
-            .candle-glow-bg {
-                width: 130px !important;
-                height: 130px !important;
-            }
-            .candle-body {
-                width: 18px !important;
-                height: 38px !important;
-            }
-            .flame-container {
-                top: 4px !important;
-                width: 12px !important;
-                height: 24px !important;
-            }
-            .burning-wick {
-                top: 24px !important;
-                width: 2px !important;
-                height: 6px !important;
-            }
-            .candle-wick-svg {
-                height: 28px !important;
-            }
-            .candle-hint {
-                font-size: 0.6rem !important;
-                width: 80px !important;
-            }
-        }
-
-        .cross-container img {
-            width: 90%;
-            height: auto;
-            object-fit: contain;
-            opacity: 0.6;
-            mix-blend-mode: multiply; 
-        }
-
-        .cross-container {
-            background-color: transparent;
         }
 
         .portrait-frame {
-            border: none; 
-            background: transparent;
-            padding: 0;
-            box-shadow: none; 
-        }
-
-        .portrait-image {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover; 
-            filter: contrast(1.02) saturate(0.95);
-        }
-
-        .candle-box {
-            background: transparent;
-            flex-direction: column;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
             position: relative;
+            width: clamp(130px, 22vw, 190px);
+            /* Subtle multiply blend mode helps the photo background dissolve into the site background */
+            mix-blend-mode: multiply;
+            filter: contrast(1.05) brightness(1.02);
         }
 
-        .candle-inner {
+        .portrait-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .frame-ornament {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            color: #ccc;
+            font-size: 0.6rem;
+            opacity: 0.8;
+        }
+
+        /* Candle Styling */
+        .candle-container {
+            width: clamp(30px, 6vw, 45px);
+            height: clamp(120px, 22vw, 160px);
+            position: relative;
+            cursor: pointer;
+            user-select: none;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: flex-end;
-            height: 100%;
-            padding-bottom: 25px;
-            position: relative;
-            pointer-events: none;
-        }
-
-        .candle-glow-bg {
-            position: absolute;
-            width: 240px;
-            height: 240px;
-            background: radial-gradient(circle, var(--candle-glow) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: 0;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            pointer-events: none;
-            top: 42%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .candle-wick-svg {
-            width: 15px;
-            height: 45px;
-            margin-bottom: -10px;
-            opacity: 0.5;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            transform-origin: bottom;
-        }
-
-        .burning-wick {
-            width: 2.5px;
-            height: 8px;
-            background: #111;
-            position: absolute;
-            top: 45px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            border-radius: 1px;
-            z-index: 4;
-        }
-
-        .flame-container {
-            position: absolute;
-            top: 10px; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 38px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        .flame {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            animation: flicker 1.2s infinite alternate ease-in-out;
-            transform-origin: center bottom;
-        }
-
-        .flame::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at bottom, #ff5e00 0%, #ff9100 40%, #ffd700 70%, transparent 95%);
-            border-radius: 50% 50% 35% 35%;
-            filter: blur(1.2px);
-        }
-
-        .flame::after {
-            content: '';
-            position: absolute;
-            bottom: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 45%;
-            height: 65%;
-            background: radial-gradient(ellipse at center, #ffffff 10%, #fff9d4 60%, transparent 100%);
-            border-radius: 50% 50% 40% 40%;
-            filter: blur(0.4px);
         }
 
         .candle-body {
-            width: 32px;
-            height: 65px;
-            background: linear-gradient(to right, #ffffff 0%, #fcfcfc 40%, #f5f5f5 60%, #e8e8e8 100%);
-            border-radius: 1px;
+            width: 100%;
+            height: 75%;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 4px 4px 2px 2px;
             position: relative;
-            box-shadow: inset -3px 0 7px rgba(0,0,0,0.03);
+        }
+
+        .wick {
+            width: 3px;
+            height: 10px;
+            background: #333;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .flame {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 40px;
+            background: linear-gradient(to bottom, #fff 0%, #ffeb3b 20%, #ff9800 60%, #f44336 90%);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 15px #ff9800, 0 0 35px rgba(255, 152, 0, 0.4);
+            animation: flicker 1s infinite alternate;
+            transition: opacity 0.4s;
             z-index: 2;
         }
 
-        .candle-base {
-            width: 40px;
-            height: 4px;
-            background: #7a6344;
-            border-radius: 1px;
-            margin-top: -1px;
-            z-index: 1;
-        }
-
-        .side-element.is-on .candle-glow-bg { opacity: 1; }
-        .side-element.is-on .flame-container { opacity: 1; }
-        .side-element.is-on .burning-wick { opacity: 1; }
-        .side-element.is-on .candle-wick-svg { 
-            opacity: 0; 
-            transform: scaleY(0.5) translateY(10px); 
-        }
-
-        .candle-hint {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-style: italic;
-            text-align: center;
-            width: 200px;
-            line-height: 1.3;
-        }
-
         @keyframes flicker {
-            0% { transform: scale(1) rotate(-0.5deg); opacity: 0.95; }
-            50% { transform: scale(1.02, 1.05) rotate(0.8deg); opacity: 1; }
-            100% { transform: scale(0.98, 1.02) rotate(-0.3deg); opacity: 0.98; }
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
         }
 
-        .section-box {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--frame-border);
-            box-shadow: 0 4px 12px var(--shadow);
+        .is-off .flame {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .bio-text {
-            text-align: center;
-            font-size: 1.1rem;
+        .is-off .candle-body {
+            background: #f0f0f0;
+        }
+
+        .hint {
+            font-size: 0.95rem;
+            color: var(--warm-brown);
             font-style: italic;
-            color: var(--text-muted);
-            border: none;
-            background: transparent;
-            box-shadow: none;
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Sections */
+        .section-card {
+            margin-top: 2rem;
+            padding: 2.5rem 1rem;
+            border-top: 1px solid var(--frame-border);
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quote-text {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--warm-brown);
+            margin-bottom: 2rem;
+            line-height: 1.8;
         }
 
         h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
             text-align: center;
-            margin-bottom: 1.2rem;
-            font-weight: 500;
+            font-weight: 400;
         }
 
-        form { display: grid; gap: 0.8rem; }
-        label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+        /* Form */
+        .condolence-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: var(--warm-brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         input, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #e0e0e0;
-            background: #fafafa;
-            font-family: inherit;
-        }
-        
-        button {
-            background: var(--text-dark);
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            transition: 0.3s;
-        }
-        button:hover { background: #554a41; }
-
-        .comment-card {
-            background: white;
             padding: 1rem;
-            margin-bottom: 0.8rem;
-            border-left: 3px solid var(--gold-accent);
-            box-shadow: 0 2px 8px var(--shadow);
+            border: 1px solid var(--frame-border);
+            background: white;
+            font-family: inherit;
+            font-size: 1rem;
+            border-radius: 4px;
         }
 
-        footer { margin-top: 2rem; text-align: center; color: var(--text-muted); padding-bottom: 2rem; }
+        .submit-btn {
+            background: var(--dark-brown);
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold);
+        }
+
+        .comments-list {
+            margin-top: 2.5rem;
+        }
+
+        .comment-item {
+            background: white;
+            padding: 1.8rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid var(--frame-border);
+            border-radius: 4px;
+        }
+
+        .comment-meta {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 0.8rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--dark-brown);
+            margin-right: 12px;
+            font-size: 1rem;
+        }
+
+        .comment-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 2rem;
+            padding: 4rem;
+            text-align: center;
+            color: var(--warm-brown);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive row adjustments */
+        @media (max-width: 480px) {
+            .memorial-row {
+                min-height: 240px;
+                gap: 2rem;
+            }
+            .section-card {
+                padding: 2rem 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="top-star">✦</div>
-        
         <header>
+            <div class="top-ornament">✦</div>
             <h1>Dr. Petra Heider</h1>
-            <div class="dates">* 21.07.1959 &nbsp; † 23.01.2026</div>
+            <div class="dates">
+                * 21.07.1959 &nbsp; † 23.01.2026
+            </div>
         </header>
 
         <div class="memorial-row">
-            <div class="side-element">
-                <div class="cross-container">
-                    <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/main/photos/cross-03.png" alt="Kreuz">
+            <!-- Center: Portrait -->
+            <div class="item-cell">
+                <div class="portrait-frame">
+                    <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/refs/heads/main/photos/1000199784.png" alt="Dr. Petra Heider">
+                    <span class="frame-ornament">✦</span>
                 </div>
             </div>
 
-            <div class="portrait-frame">
-                <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/refs/heads/main/photos/1000199784.png" alt="Dr. Petra Heider" class="portrait-image">
-            </div>
-
-            <div class="side-element" id="candleWrapper">
-                <div class="candle-glow-bg"></div>
-                <div class="candle-box" id="candleToggle">
-                    <div class="candle-inner">
-                        <div class="flame-container">
-                            <div class="flame"></div>
-                        </div>
-                        <div class="burning-wick"></div>
-                        <svg class="candle-wick-svg" viewBox="0 0 20 60">
-                            <path d="M10,60 C10,50 15,45 10,35 C5,25 10,20 10,10" fill="none" stroke="#444" stroke-width="1.8" />
-                        </svg>
-                        <div class="candle-body"></div>
-                        <div class="candle-base"></div>
+            <!-- Right: Candle -->
+            <div class="item-cell">
+                <div class="candle-container" id="candleToggle">
+                    <div class="flame"></div>
+                    <div class="candle-body">
+                        <div class="wick"></div>
                     </div>
                 </div>
-                <p class="candle-hint">Klicken Sie, um die Kerze anzuzünden</p>
             </div>
         </div>
 
-        <section class="section-box bio-text">
-            <p>Wo Liebe verweilt, endet nichts.</p>
+        <p class="hint" id="candleHint">Klicken Sie auf die Kerze, um sie zu löschen</p>
+
+        <section class="quote-text">
+            <p>"Wo Liebe verweilt, endet nichts."</p>
             <p>Ihr Licht begleitet uns – still und ewig spürbar im Herzen.</p>
         </section>
 
-        <section class="section-box">
-            <h2>Gedenken & Kondolenz</h2>
-            <form id="condolenceForm">
-                <div>
-                    <label for="name">Ihr Name</label>
+        <section class="section-card">
+            <h2>Gedenkbuch</h2>
+            <form class="condolence-form" id="condolenceForm">
+                <div class="input-group">
+                    <label>Ihr Name</label>
                     <input type="text" id="name" required>
                 </div>
-                <div>
-                    <label for="message">Ihre Botschaft</label>
+                <div class="input-group">
+                    <label>Ihre Worte</label>
                     <textarea id="message" rows="4" required></textarea>
                 </div>
-                <button type="submit" id="submitBtn">Nachricht teilen</button>
+                <button type="submit" class="submit-btn">Nachricht teilen</button>
             </form>
+
+            <div class="comments-list" id="commentsList"></div>
         </section>
 
-        <div id="commentsList" style="width: 100%; max-width: 600px;"></div>
-
         <footer>
-            <div class="top-star">✦</div>
-            <p>Immer in unseren Gedanken.</p>
+            <p>❧ Immer in unseren Gedanken ❧</p>
         </footer>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    <script>
+        // Candle Toggle Logic
+        const candle = document.getElementById('candleToggle');
+        const hint = document.getElementById('candleHint');
+        let isLit = true;
 
-        const candleToggle = document.getElementById('candleToggle');
-        const candleWrapper = document.getElementById('candleWrapper');
-        const candleHint = document.querySelector('.candle-hint');
-        let isLit = false;
+        candle.addEventListener('click', () => {
+            isLit = !isLit;
+            candle.classList.toggle('is-off', !isLit);
+            hint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie, um die Kerze anzuzünden';
+        });
 
-        if (candleToggle) {
-            candleToggle.addEventListener('click', () => {
-                isLit = !isLit;
-                candleWrapper.classList.toggle('is-on', isLit);
-                candleHint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie, um die Kerze anzuzünden';
-            });
-        }
-
-        let db, auth, appId;
-        try {
-            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-            if (firebaseConfig) {
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-                appId = typeof __app_id !== 'undefined' ? __app_id : 'petra-heider-memorial';
-
-                const initAuth = async () => {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                };
-
-                onAuthStateChanged(auth, (user) => {
-                    if (user) setupComments();
-                });
-
-                initAuth();
-            }
-        } catch (e) {
-            console.warn("Firebase konnte nicht geladen werden:", e);
-        }
-
-        function setupComments() {
-            if (!db) return;
-            const ref = collection(db, 'artifacts', appId, 'public', 'data', 'condolences');
-            onSnapshot(ref, (snapshot) => {
-                const list = document.getElementById('commentsList');
-                if (!list) return;
-                list.innerHTML = '';
-                const items = [];
-                snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-                items.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-                
-                items.forEach(data => {
-                    const card = document.createElement('div');
-                    card.className = 'comment-card';
-                    const date = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('de-DE') : 'Gerade eben';
-                    card.innerHTML = `<strong>${escapeHtml(data.name)}</strong> <small style="color: #999; float: right">${date}</small><p style="margin-top: 5px">${escapeHtml(data.message)}</p>`;
-                    list.appendChild(card);
-                });
-            });
-        }
-
+        // Form Logic
         const form = document.getElementById('condolenceForm');
-        if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                if (!db || !auth.currentUser) return;
+        const list = document.getElementById('commentsList');
 
-                const name = document.getElementById('name').value;
-                const message = document.getElementById('message').value;
-                const btn = document.getElementById('submitBtn');
-                btn.disabled = true;
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            const date = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
 
-                try {
-                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'condolences'), {
-                        name, message, createdAt: serverTimestamp()
-                    });
-                    e.target.reset();
-                } finally {
-                    btn.disabled = false;
-                }
-            });
-        }
+            const item = document.createElement('div');
+            item.className = 'comment-item';
+            item.innerHTML = `
+                <div class="comment-meta">
+                    <span class="comment-author">${escapeHtml(name)}</span>
+                    <span>${date}</span>
+                </div>
+                <div class="comment-text">${escapeHtml(message)}</div>
+            `;
+            list.prepend(item);
+            form.reset();
+        });
 
         function escapeHtml(text) {
             const div = document.createElement('div');
@@ -542,3 +405,4 @@
     </script>
 </body>
 </html>
+

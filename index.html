@@ -13,7 +13,6 @@
         }
 
         :root {
-            /* Updated background color to perfectly match the photo's warm tones */
             --bg-cream: #fdfaf5; 
             --dark-brown: #4a443f;
             --warm-brown: #7a736d;
@@ -69,30 +68,33 @@
             margin-bottom: 2.5rem;
         }
 
-        /* Memorial Row Layout */
+        /* Memorial Row Layout - Centered Portrait and Candle */
         .memorial-row {
             display: flex;
-            align-items: center;
+            align-items: flex-end; 
             justify-content: center;
             width: 100%;
-            max-width: 700px;
-            margin: 2rem auto;
-            min-height: 320px;
-            gap: 4rem;
+            max-width: 600px;
+            margin: 1rem auto;
+            min-height: 220px;
+            gap: 3rem;
         }
 
         .item-cell {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
         }
 
         .portrait-frame {
             position: relative;
             width: clamp(130px, 22vw, 190px);
-            /* Subtle multiply blend mode helps the photo background dissolve into the site background */
             mix-blend-mode: multiply;
             filter: contrast(1.05) brightness(1.02);
+            display: block;
+            border: none;
+            padding: 0;
+            background: transparent;
         }
 
         .portrait-frame img {
@@ -101,88 +103,91 @@
             display: block;
         }
 
-        .frame-ornament {
-            position: absolute;
-            bottom: 4px;
-            right: 4px;
-            color: #ccc;
-            font-size: 0.6rem;
-            opacity: 0.8;
-        }
-
-        /* Candle Styling */
+        /* Candle Styling - Slim and Small */
         .candle-container {
-            width: clamp(30px, 6vw, 45px);
-            height: clamp(120px, 22vw, 160px);
+            width: clamp(15px, 3vw, 22px);
+            height: clamp(63px, 10.8vw, 90px);
             position: relative;
             cursor: pointer;
             user-select: none;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            transition: transform 0.2s ease;
+            /* Increased margin to move candle up as requested */
+            margin-bottom: 25px; 
+        }
+        
+        .candle-container:hover {
+            transform: scale(1.05);
         }
 
         .candle-body {
             width: 100%;
-            height: 75%;
+            height: 70%;
             background: #fff;
             border: 1px solid #eee;
-            border-radius: 4px 4px 2px 2px;
+            border-radius: 2px 2px 1px 1px;
             position: relative;
+            box-shadow: inset -1px 0 3px rgba(0,0,0,0.02);
         }
 
         .wick {
-            width: 3px;
-            height: 10px;
+            width: 1px;
+            height: 6px;
             background: #333;
             position: absolute;
-            top: -10px;
+            top: -6px;
             left: 50%;
             transform: translateX(-50%);
         }
 
         .flame {
             position: absolute;
-            top: -45px;
+            top: -28px;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
-            height: 40px;
+            width: 12px;
+            height: 24px;
             background: linear-gradient(to bottom, #fff 0%, #ffeb3b 20%, #ff9800 60%, #f44336 90%);
             border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 15px #ff9800, 0 0 35px rgba(255, 152, 0, 0.4);
-            animation: flicker 1s infinite alternate;
-            transition: opacity 0.4s;
+            box-shadow: 0 0 10px #ff9800, 0 0 20px rgba(255, 152, 0, 0.4);
+            animation: flicker 1.2s infinite alternate ease-in-out;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             z-index: 2;
         }
 
         @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); }
-            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); }
+            100% { transform: translateX(-50%) scale(1.08) rotate(1deg); }
         }
 
+        /* is-off state */
         .is-off .flame {
             opacity: 0;
+            transform: translateX(-50%) scale(0.4);
             pointer-events: none;
         }
 
         .is-off .candle-body {
-            background: #f0f0f0;
+            background: #f5f2ed;
+            border-color: #e5e0d8;
         }
 
         .hint {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--warm-brown);
             font-style: italic;
             text-align: center;
             margin-top: 1rem;
             margin-bottom: 2rem;
+            transition: color 0.3s;
         }
 
         /* Sections */
         .section-card {
-            margin-top: 2rem;
-            padding: 2.5rem 1rem;
+            margin-top: 1rem;
+            padding: 2rem 1rem;
             border-top: 1px solid var(--frame-border);
             width: 100%;
             max-width: 650px;
@@ -201,7 +206,7 @@
 
         h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
             text-align: center;
             font-weight: 400;
@@ -210,7 +215,7 @@
         /* Form */
         .condolence-form {
             display: grid;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .input-group {
@@ -220,14 +225,14 @@
         }
 
         label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--warm-brown);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         input, textarea {
-            padding: 1rem;
+            padding: 0.9rem;
             border: 1px solid var(--frame-border);
             background: white;
             font-family: inherit;
@@ -239,9 +244,9 @@
             background: var(--dark-brown);
             color: white;
             border: none;
-            padding: 1.2rem;
+            padding: 1rem;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: 0.3s;
             border-radius: 4px;
@@ -252,52 +257,49 @@
         }
 
         .comments-list {
-            margin-top: 2.5rem;
+            margin-top: 2rem;
         }
 
         .comment-item {
             background: white;
-            padding: 1.8rem;
-            margin-bottom: 1.2rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
             border: 1px solid var(--frame-border);
             border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .comment-meta {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #999;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
 
         .comment-author {
             font-weight: 600;
             color: var(--dark-brown);
             margin-right: 12px;
-            font-size: 1rem;
         }
 
         .comment-text {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.6;
         }
 
         footer {
             margin-top: 2rem;
-            padding: 4rem;
+            padding: 3rem;
             text-align: center;
             color: var(--warm-brown);
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
-        /* Responsive row adjustments */
         @media (max-width: 480px) {
             .memorial-row {
-                min-height: 240px;
+                min-height: 220px;
                 gap: 2rem;
-            }
-            .section-card {
-                padding: 2rem 0.5rem;
+                align-items: flex-end;
             }
         }
     </style>
@@ -314,17 +316,16 @@
         </header>
 
         <div class="memorial-row">
-            <!-- Center: Portrait -->
+            <!-- Portrait Section -->
             <div class="item-cell">
                 <div class="portrait-frame">
                     <img src="https://raw.githubusercontent.com/Avishek2020/petra-heider/refs/heads/main/photos/1000199784.png" alt="Dr. Petra Heider">
-                    <span class="frame-ornament">✦</span>
                 </div>
             </div>
 
-            <!-- Right: Candle -->
+            <!-- Candle Section -->
             <div class="item-cell">
-                <div class="candle-container" id="candleToggle">
+                <div class="candle-container is-off" id="candleToggle">
                     <div class="flame"></div>
                     <div class="candle-body">
                         <div class="wick"></div>
@@ -333,7 +334,7 @@
             </div>
         </div>
 
-        <p class="hint" id="candleHint">Klicken Sie auf die Kerze, um sie zu löschen</p>
+        <p class="hint" id="candleHint">Klicken Sie, um die Kerze anzuzünden</p>
 
         <section class="quote-text">
             <p>"Wo Liebe verweilt, endet nichts."</p>
@@ -363,10 +364,9 @@
     </div>
 
     <script>
-        // Candle Toggle Logic
         const candle = document.getElementById('candleToggle');
         const hint = document.getElementById('candleHint');
-        let isLit = true;
+        let isLit = false;
 
         candle.addEventListener('click', () => {
             isLit = !isLit;
@@ -374,7 +374,6 @@
             hint.textContent = isLit ? 'Klicken Sie auf die Kerze, um sie zu löschen' : 'Klicken Sie, um die Kerze anzuzünden';
         });
 
-        // Form Logic
         const form = document.getElementById('condolenceForm');
         const list = document.getElementById('commentsList');
 

@@ -20,7 +20,13 @@ function readMessages() {
 }
 
 function writeMessages(messages) {
-  fs.writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2), 'utf8');
+  try {
+    fs.writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2), 'utf8');
+    console.log(`Successfully wrote ${messages.length} message(s) to ${MESSAGES_FILE}`);
+  } catch (err) {
+    console.error('Error writing messages file:', err);
+    throw err;
+  }
 }
 
 app.get('/api/messages', (req, res) => {
@@ -35,8 +41,11 @@ app.get('/api/messages', (req, res) => {
 
 app.post('/api/messages', (req, res) => {
   try {
-    const { name, ort, relationship, message } = req.body || {};
+    const { name, ort, beziehung, message } = req.body || {};
+    console.log('Received POST request:', { name, ort, beziehung, message });
+    
     if (!name || !message || typeof name !== 'string' || typeof message !== 'string') {
+      console.log('Validation failed: name or message missing');
       return res.status(400).json({ error: 'Name and message are required' });
     }
     const date = new Date().toLocaleDateString('de-DE', {
@@ -45,15 +54,30 @@ app.post('/api/messages', (req, res) => {
       year: 'numeric'
     });
     const ortValue = (ort != null && typeof ort === 'string') ? ort.trim() : '';
-    const relValue = (relationship != null && typeof relationship === 'string') ? relationship.trim() : '';
+    // Always save Beziehung field, even if empty
+    let relValue = '';
+    if (beziehung != null && beziehung !== undefined) {
+      if (typeof beziehung === 'string') {
+        relValue = beziehung.trim();
+      } else {
+        relValue = String(beziehung).trim();
+      }
+    }
+    // Fallback: also check for 'relationship' in case old clients send it
+    if (!relValue && req.body.relationship != null && req.body.relationship !== undefined) {
+      relValue = typeof req.body.relationship === 'string' ? req.body.relationship.trim() : String(req.body.relationship).trim();
+    }
+    console.log('Processing values - ort:', ortValue, 'beziehung received:', beziehung, 'beziehung saved:', relValue);
     const messages = readMessages();
-    const newMsg = { name: name.trim(), ort: ortValue, relationship: relValue, message: message.trim(), date };
+    const newMsg = { name: name.trim(), Beziehung: relValue, ort: ortValue, message: message.trim(), date };
+    console.log('Saving message with Beziehung:', newMsg.Beziehung, 'Full message:', JSON.stringify(newMsg, null, 2));
     messages.unshift(newMsg);
     writeMessages(messages);
+    console.log('Message saved successfully:', newMsg);
     res.status(201).json(newMsg);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to save message' });
+    console.error('Error saving message:', err);
+    res.status(500).json({ error: 'Failed to save message', details: err.message });
   }
 });
 

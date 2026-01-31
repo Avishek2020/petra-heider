@@ -452,13 +452,6 @@
             line-height: 1.6;
             white-space: pre-wrap;
             word-break: keep-all;
-            margin-bottom: 0.5rem;
-        }
-
-        .comment-date {
-            font-size: 0.85rem;
-            color: #999;
-            font-style: italic;
         }
 
         footer {
@@ -780,8 +773,8 @@
                 </div>
                 <div class="input-group">
                     <label>Beziehung</label>
-                    <select id="relationship">
-                        <option value="Freund">Freund</option>
+                    <select id="beziehung">
+                        <option value="Freund" selected>Freund</option>
                         <option value="Freundin">Freundin</option>
                         <option value="Familie">Familie</option>
                     </select>
@@ -837,15 +830,17 @@
             item.className = 'comment-item';
             const ortStr = (msg.ort != null && String(msg.ort).trim()) ? String(msg.ort).trim() : '';
             const ortHtml = ortStr ? ` · ${escapeHtml(ortStr)}` : '';
-            const relStr = (msg.relationship != null && String(msg.relationship).trim()) ? String(msg.relationship).trim() : '';
+            const relStr = (msg.Beziehung != null && String(msg.Beziehung).trim()) 
+                ? String(msg.Beziehung).trim() 
+                : ((msg.beziehung != null && String(msg.beziehung).trim()) ? String(msg.beziehung).trim() : '');
             const relHtml = relStr ? ` · ${escapeHtml(relStr)}` : '';
             item.innerHTML = `
                 <div class="comment-body">
                     <div class="comment-meta">
-                        <span class="comment-author">${escapeHtml(msg.name)}</span>${ortHtml}${relHtml}
+                        <span class="comment-author">${escapeHtml(msg.name)}</span>${relHtml}${ortHtml}
+                        <span> · ${msg.date || ''}</span>
                     </div>
                     <div class="comment-text">${escapeHtml(msg.message)}</div>
-                    <div class="comment-date">${msg.date || ''}</div>
                 </div>
             `;
             return item;
@@ -897,12 +892,18 @@
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
             const ort = document.getElementById('ort').value.trim();
-            const relationship = document.getElementById('relationship').value.trim();
+            const beziehungSelect = document.getElementById('beziehung');
+            const beziehung = beziehungSelect ? beziehungSelect.value : '';
             const message = document.getElementById('message').value.trim();
+            
+            console.log('Form values:', { name, ort, beziehung, message });
+            console.log('Beziehung select element:', beziehungSelect);
+            console.log('Beziehung value:', beziehung);
+            
             if (!name || !message) return;
 
             const date = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
-            const newMsg = { name, ort, relationship, message, date };
+            const newMsg = { name, ort, beziehung, message, date };
 
             const prevText = submitBtn.textContent;
             submitBtn.disabled = true;
@@ -912,7 +913,7 @@
                 const res = await fetch('/api/messages', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, ort, relationship, message })
+                    body: JSON.stringify({ name, ort, beziehung, message })
                 });
                 if (res.ok) {
                     const saved = await res.json();
@@ -921,8 +922,15 @@
                     submitBtn.disabled = false;
                     submitBtn.textContent = prevText;
                     return;
+                } else {
+                    const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+                    console.error('Server error:', res.status, errorData);
+                    alert(`Fehler beim Speichern: ${errorData.error || 'Unbekannter Fehler'}`);
                 }
-            } catch (err) {}
+            } catch (err) {
+                console.error('Network error:', err);
+                alert('Verbindungsfehler: Stellen Sie sicher, dass der Server läuft (npm start) und Sie die Seite über http://localhost:3001 öffnen.');
+            }
 
             submitBtn.disabled = false;
             submitBtn.textContent = prevText;

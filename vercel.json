@@ -1,5 +1,13 @@
 {
   "version": 2,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/api/messages",
+      "destination": "/api/messages"
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",

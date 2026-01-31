@@ -53,7 +53,7 @@ async function handler(req, res) {
       });
     }
     try {
-      const { name, ort, message } = req.body || {};
+      const { name, ort, relationship, message } = req.body || {};
       if (!name || !message || typeof name !== 'string' || typeof message !== 'string') {
         return res.status(400).json({ error: 'Name and message are required' });
       }
@@ -63,8 +63,9 @@ async function handler(req, res) {
         year: 'numeric',
       });
       const ortValue = ort != null && typeof ort === 'string' ? ort.trim() : '';
+      const relValue = relationship != null && typeof relationship === 'string' ? relationship.trim() : '';
       const messages = await getMessagesFromBlob();
-      const newMsg = { name: name.trim(), ort: ortValue, message: message.trim(), date };
+      const newMsg = { name: name.trim(), ort: ortValue, relationship: relValue, message: message.trim(), date };
       messages.unshift(newMsg);
       await saveMessagesToBlob(messages);
       return res.status(201).json(newMsg);

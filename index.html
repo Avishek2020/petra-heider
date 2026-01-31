@@ -49,7 +49,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .top-ornament {
@@ -73,7 +73,7 @@
             font-size: 1.4rem;
             font-style: normal;
             color: var(--warm-brown);
-            margin-bottom: 1rem;
+            margin-bottom: 0.35rem;
         }
 
         /* Memorial Row Layout */
@@ -84,7 +84,7 @@
             align-items: center;
             width: 100%;
             max-width: 900px;
-            margin: -0.5rem auto 2rem auto;
+            margin: 0 auto 0.2rem auto;
             gap: 3rem;
         }
 
@@ -121,7 +121,7 @@
 
         .portrait-frame {
             position: relative;
-            width: clamp(180px, 25vw, 260px);
+            width: clamp(144px, 20vw, 208px);
             mix-blend-mode: multiply;
             filter: contrast(1.05) brightness(1.02);
             display: block;
@@ -139,7 +139,7 @@
 
         /* Cross Styling */
         .cross-img {
-            height: clamp(220px, 35vw, 320px);
+            height: clamp(176px, 28vw, 256px);
             width: auto;
             opacity: 0.6;
             filter: sepia(0.3);
@@ -147,8 +147,8 @@
 
         /* Candle Styling */
         .candle-container {
-            width: clamp(50px, 10vw, 70px);
-            height: clamp(220px, 35vw, 320px);
+            width: clamp(40px, 8vw, 56px);
+            height: clamp(176px, 28vw, 256px);
             position: relative;
             cursor: pointer;
             user-select: none;
@@ -227,7 +227,7 @@
             font-style: normal;
             text-align: center;
             margin-top: 0.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0.2rem;
             transition: color 0.3s;
         }
 
@@ -243,14 +243,61 @@
             margin-right: auto;
         }
 
+        /* Quote row: flexbox, flowers and text vertically aligned */
+        .quote-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            margin-top: 0.2rem;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quote-flower-left {
+            flex-shrink: 0;
+            width: 154px;
+            height: 210px;
+            margin-top: -0.5rem;
+        }
+
+        .quote-flower-right {
+            flex-shrink: 0;
+            width: 131px;
+            height: 143px;
+            overflow: hidden;
+        }
+
+        .quote-flower-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+        }
+
+        .quote-flower-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
         .quote-text {
             font-family: 'Quicksand', sans-serif;
-            text-align: center;
+            text-align: left;
             font-style: normal;
-            font-size: 1.2rem;
+            font-size: 0.95rem;
             color: var(--warm-brown);
-            margin-bottom: 2rem;
-            line-height: 1.8;
+            line-height: 1.25;
+            flex-shrink: 0;
+        }
+
+        .quote-text p {
+            margin: 0;
         }
 
         h2 {
@@ -282,17 +329,22 @@
 
         input,
         textarea {
-            padding: 0.9rem;
+            padding: 0.65rem 0.75rem;
             border: 1px solid var(--frame-border);
             background: white;
             font-family: 'Times New Roman', Times, serif;
-            font-size: 1rem;
+            font-size: calc(1rem + 2pt);
             border-radius: 4px;
         }
 
+        textarea {
+            min-height: 4.5em;
+            resize: vertical;
+        }
+
         .submit-btn {
-            background: var(--dark-brown);
-            color: white;
+            background: #8fbc8f;
+            color: #2d4a2d;
             border: none;
             padding: 1rem;
             font-family: 'Times New Roman', Times, serif;
@@ -303,7 +355,7 @@
         }
 
         .submit-btn:hover {
-            background: var(--gold);
+            background: #7cb87c;
         }
 
         .comments-list {
@@ -335,6 +387,8 @@
         .comment-text {
             font-size: 1rem;
             line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: keep-all;
         }
 
         footer {
@@ -361,14 +415,28 @@
                 font-size: 1.1rem;
             }
 
-            .quote-text {
-                font-size: 1.05rem;
+            .quote-section {
                 margin-bottom: 1.5rem;
+                gap: 0.35rem;
+            }
+
+            .quote-flower-left {
+                width: 122px;
+                height: 171px;
+            }
+
+            .quote-flower-right {
+                width: 104px;
+                height: 116px;
+            }
+
+            .quote-text {
+                font-size: 0.9rem;
                 padding: 0 0.5rem;
             }
 
             .quote-text p {
-                margin-bottom: 0.5rem;
+                margin: 0;
             }
 
             h2 {
@@ -380,10 +448,18 @@
                 padding: 1.5rem 1rem;
             }
 
+            .condolence-form {
+                gap: 0.6rem;
+            }
+
+            .input-group {
+                gap: 0.3rem;
+            }
+
             input,
             textarea {
-                padding: 0.85rem;
-                font-size: 16px;
+                padding: 0.6rem 0.7rem;
+                font-size: calc(1rem + 2pt);
             }
 
             .submit-btn {
@@ -406,7 +482,7 @@
             .memorial-row {
                 align-items: center;
                 gap: 1rem;
-                margin: 0 auto 1.5rem auto;
+                margin: 0 auto 0.75rem auto;
                 max-width: 100%;
             }
 
@@ -415,21 +491,21 @@
             }
 
             .cross-img {
-                height: clamp(140px, 42vw, 200px);
+                height: clamp(112px, 34vw, 160px);
             }
 
             .portrait-frame {
-                width: clamp(140px, 42vw, 200px);
+                width: clamp(112px, 34vw, 160px);
             }
 
             .candle-container {
-                width: clamp(36px, 10vw, 48px);
-                height: clamp(140px, 42vw, 200px);
+                width: clamp(29px, 8vw, 38px);
+                height: clamp(112px, 34vw, 160px);
             }
 
             .hint {
                 font-size: 0.85rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 0.2rem;
             }
         }
 
@@ -452,24 +528,38 @@
 
             .memorial-row {
                 gap: 0.75rem;
-                margin-bottom: 1.25rem;
+                margin-bottom: 0.2rem;
             }
 
             .cross-img {
-                height: 140px;
+                height: 112px;
             }
 
             .portrait-frame {
-                width: 140px;
+                width: 112px;
             }
 
             .candle-container {
-                width: 32px;
-                height: 140px;
+                width: 26px;
+                height: 112px;
+            }
+
+            .quote-section {
+                gap: 0.25rem;
+            }
+
+            .quote-flower-left {
+                width: 91px;
+                height: 126px;
+            }
+
+            .quote-flower-right {
+                width: 77px;
+                height: 86px;
             }
 
             .quote-text {
-                font-size: 1rem;
+                font-size: 0.85rem;
             }
 
             .section-card {
@@ -489,62 +579,11 @@
                 font-size: 0.9rem;
             }
 
-            .leaf {
-                max-width: 20px;
-                max-height: 20px;
-            }
-        }
-
-        /* Falling leaves */
-        .leaves-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .leaf {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            transform-origin: center center;
-            animation: fall linear infinite;
-        }
-
-        .leaf img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-10%) translateX(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(25vh) translateX(15px) rotate(90deg);
-            }
-            50% {
-                transform: translateY(50vh) translateX(-10px) rotate(180deg);
-            }
-            75% {
-                transform: translateY(75vh) translateX(12px) rotate(270deg);
-            }
-            100% {
-                transform: translateY(110vh) translateX(0) rotate(360deg);
-            }
         }
     </style>
 </head>
 
 <body>
-
-    <div class="leaves-container" id="leavesContainer" aria-hidden="true"></div>
 
     <div class="container">
         <header>
@@ -580,18 +619,26 @@
             </div>
         </div>
 
-        <section class="quote-text">
-            <p>Wo Liebe verweilt, endet nichts.</p>
-            <p>Ihr Licht begleitet uns –</p>
-            <p>leise, unsichtbar für die Augen,</p>
-            <p>aber ewig spürbar im Herzen.</p>
+        <section class="quote-section">
+            <div class="quote-flower-left" aria-hidden="true">
+                <img src="./photos/Left-Blumen.png" alt="">
+            </div>
+            <div class="quote-text">
+                <p>Wo Liebe verweilt, endet nichts.</p>
+                <p>Ihr Licht begleitet uns –</p>
+                <p>leise, unsichtbar für die Augen,</p>
+                <p>aber ewig spürbar im Herzen.</p>
+            </div>
+            <div class="quote-flower-right" aria-hidden="true">
+                <img src="./photos/Right-Blumen.png" alt="">
+            </div>
         </section>
 
         <section class="section-card">
             <h2>Gedenkbuch</h2>
             <form class="condolence-form" id="condolenceForm">
                 <div class="input-group">
-                    <label>Ihr Name</label>
+                    <label>Name</label>
                     <input type="text" id="name" required>
                 </div>
                 <div class="input-group">
@@ -599,8 +646,8 @@
                     <input type="text" id="ort" placeholder="">
                 </div>
                 <div class="input-group">
-                    <label>Ihre Worte</label>
-                    <textarea id="message" rows="4" required></textarea>
+                    <label>Ihre / Deine Worte</label>
+                    <textarea id="message" rows="3" required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Nachricht teilen</button>
             </form>
@@ -614,27 +661,6 @@
     </div>
 
     <script>
-        (function initLeaves() {
-            const container = document.getElementById('leavesContainer');
-            if (!container) return;
-            const leafCount = 18;
-            for (let i = 0; i < leafCount; i++) {
-                const leaf = document.createElement('div');
-                leaf.className = 'leaf';
-                const img = document.createElement('img');
-                img.src = './photos/leaf.png';
-                img.alt = '';
-                leaf.appendChild(img);
-                leaf.style.left = Math.random() * 100 + '%';
-                const duration = 12 + Math.random() * 14;
-                leaf.style.animationDuration = duration + 's';
-                leaf.style.animationDelay = -(Math.random() * duration) + 's';
-                leaf.style.width = (18 + Math.random() * 16) + 'px';
-                leaf.style.height = (18 + Math.random() * 16) + 'px';
-                container.appendChild(leaf);
-            }
-        })();
-
         const candle = document.getElementById('candleToggle');
         const hint = document.getElementById('candleHint');
         let isLit = false;

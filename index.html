@@ -316,8 +316,43 @@
 
         .input-group {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .input-group:has(textarea) {
+            align-items: flex-start;
+        }
+
+        .condolence-form .input-group label {
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+
+        .condolence-form .input-group input,
+        .condolence-form .input-group textarea {
+            flex: 1;
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .submit-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .submit-row .submit-spacer {
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+
+        .submit-row .submit-btn {
+            flex: 1;
+            min-width: 0;
+            max-width: 100%;
         }
 
         label {
@@ -450,22 +485,47 @@
 
             .condolence-form {
                 gap: 0.6rem;
+                max-width: 100%;
+                overflow: hidden;
             }
 
             .input-group {
-                gap: 0.3rem;
+                gap: 0.35rem;
+            }
+
+            .condolence-form .input-group label {
+                min-width: 100px;
+                font-size: 0.75rem;
+            }
+
+            .condolence-form .input-group input,
+            .condolence-form .input-group textarea {
+                max-width: 100%;
+                box-sizing: border-box;
             }
 
             input,
             textarea {
-                padding: 0.6rem 0.7rem;
-                font-size: calc(1rem + 2pt);
+                padding: 0.5rem 0.6rem;
+                font-size: 1rem;
+            }
+
+            textarea {
+                min-height: 3.5em;
+            }
+
+            .submit-row {
+                gap: 0.35rem;
+            }
+
+            .submit-row .submit-spacer {
+                min-width: 100px;
             }
 
             .submit-btn {
-                padding: 0.9rem 1rem;
-                font-size: 1.1rem;
-                min-height: 48px;
+                padding: 0.75rem 0.85rem;
+                font-size: 1rem;
+                min-height: 44px;
             }
 
             .comment-item {
@@ -566,6 +626,23 @@
                 padding: 1.25rem 0.75rem;
             }
 
+            .condolence-form .input-group label {
+                min-width: 80px;
+                font-size: 0.7rem;
+            }
+
+            .input-group {
+                gap: 0.25rem;
+            }
+
+            .submit-row .submit-spacer {
+                min-width: 80px;
+            }
+
+            .submit-row {
+                gap: 0.25rem;
+            }
+
             .comment-item {
                 padding: 1rem 0.75rem;
             }
@@ -646,10 +723,13 @@
                     <input type="text" id="ort" placeholder="">
                 </div>
                 <div class="input-group">
-                    <label>Ihre / Deine Worte</label>
+                    <label>IHRE/<br><span style="text-transform: none;">Deine Worte</span></label>
                     <textarea id="message" rows="3" required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Nachricht teilen</button>
+                <div class="submit-row">
+                    <span class="submit-spacer" aria-hidden="true"></span>
+                    <button type="submit" class="submit-btn">Nachricht teilen</button>
+                </div>
             </form>
 
             <div class="comments-list" id="commentsList"></div>

@@ -452,6 +452,13 @@
             line-height: 1.6;
             white-space: pre-wrap;
             word-break: keep-all;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-date {
+            font-size: 0.85rem;
+            color: #999;
+            font-style: italic;
         }
 
         footer {
@@ -836,9 +843,9 @@
                 <div class="comment-body">
                     <div class="comment-meta">
                         <span class="comment-author">${escapeHtml(msg.name)}</span>${ortHtml}${relHtml}
-                        <span> · ${msg.date || ''}</span>
                     </div>
                     <div class="comment-text">${escapeHtml(msg.message)}</div>
+                    <div class="comment-date">${msg.date || ''}</div>
                 </div>
             `;
             return item;

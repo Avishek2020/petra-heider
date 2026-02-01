@@ -1345,15 +1345,16 @@
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
             const ort = document.getElementById('ort').value.trim();
-            const beziehungSelect = document.getElementById('beziehung');
-            const beziehung = beziehungSelect ? beziehungSelect.value : '';
+            const beziehungInput = document.getElementById('beziehung');
+            const beziehung = beziehungInput ? beziehungInput.value.trim() : '';
             const message = document.getElementById('message').value.trim();
             
             console.log('Form values:', { name, ort, beziehung, message });
-            console.log('Beziehung input element:', beziehungInput);
-            console.log('Beziehung value:', beziehung);
             
-            if (!name || !message) return;
+            if (!name || !message) {
+                alert('Bitte füllen Sie mindestens die Felder "Name" und "Ihre/Deine Worte" aus.');
+                return;
+            }
 
             const date = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
             const newMsg = { name, ort, beziehung, message, date };

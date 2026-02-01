@@ -119,8 +119,8 @@
 
         .portrait-frame {
             position: relative;
-            width: clamp(160px, 22vw, 240px);
-            height: clamp(160px, 22vw, 240px);
+            width: clamp(200px, 28vw, 300px);
+            height: clamp(200px, 28vw, 300px);
             mix-blend-mode: multiply;
             filter: contrast(1.05) brightness(1.02);
             display: block;
@@ -207,20 +207,21 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Cormorant Garamond', serif;
             font-size: clamp(6px, 1.2vw, 9px);
             color: #4a443f;
             line-height: 1.3;
             z-index: 1;
             pointer-events: none;
             font-weight: 700;
-            opacity: 0;
+            opacity: 1;
+            font-style: normal;
             transition: opacity 0.5s ease;
         }
 
-        /* Show candle text when candle is lit */
+        /* Hide candle text when candle is lit (glowing) */
         .candle-container:not(.is-off) .candle-text {
-            opacity: 1;
+            opacity: 0;
         }
 
         .candle-text div {
@@ -232,25 +233,15 @@
             font-size: clamp(10px, 2vw, 14px);
             margin-bottom: clamp(1px, 0.3vw, 2px);
             font-weight: 700;
-            font-family: 'Dancing Script', cursive;
-        }
-
-        /* GESTERN, HEUTE, MORGEN, IMMER - normal fancy font, bold, not italic */
-        .candle-text div:nth-child(2),
-        .candle-text div:nth-child(3),
-        .candle-text div:nth-child(4),
-        .candle-text div:nth-child(5) {
             font-family: 'Cormorant Garamond', serif;
             font-style: normal;
-            font-weight: 700;
-            font-size: clamp(9px, 1.8vw, 12px);
         }
 
         .candle-text div:last-child {
-            margin-top: clamp(2px, 0.5vw, 4px);
             font-size: clamp(10px, 2vw, 14px);
             font-weight: 700;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: normal;
         }
 
         /* Add 3D cylindrical highlight - only when candle is off */
@@ -438,7 +429,7 @@
 
         .quote-section {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
             gap: 0.5rem;
             width: 100%;
@@ -463,8 +454,9 @@
             flex-shrink: 0;
             gap: 2rem;
             text-align: center;
-            margin-left: 0;
-            margin-right: 0.2rem;
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+            align-self: center;
         }
 
         .quote-text {
@@ -488,19 +480,20 @@
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 50px;
+            margin-top: 40px;
             flex-shrink: 0;
-            align-self: flex-start;
-            margin-left: 0.5rem;
+            align-self: center;
+            margin-left: 2.375rem;
             overflow: visible;
         }
 
         .quote-flower-left {
             flex-shrink: 0;
-            width: clamp(100px, 15vw, 154px);
-            height: clamp(136px, 20vw, 210px);
-            margin-top: 0;
+            width: clamp(130px, 19.5vw, 200px);
+            height: clamp(177px, 26vw, 273px);
+            margin-top: -130px;
             border: none;
+            align-self: center;
             box-sizing: border-box;
             display: block;
             position: relative;
@@ -754,10 +747,11 @@
             }
 
             .quote-flower-left {
-                width: clamp(80px, 12vw, 100px);
-                height: clamp(109px, 16vw, 136px);
+                width: clamp(104px, 15.6vw, 130px);
+                height: clamp(142px, 20.8vw, 177px);
                 flex-shrink: 0;
                 aspect-ratio: 154 / 210;
+                margin-top: -130px;
             }
 
             .quote-flower-right {
@@ -801,7 +795,8 @@
 
             .quote-candle {
                 gap: 0.4rem;
-                margin-top: -50px;
+                margin-top: -60px;
+                align-self: center;
             }
 
             .candle-container {
@@ -919,10 +914,11 @@
             }
 
             .quote-flower-left {
-                width: clamp(65px, 10vw, 80px);
-                height: clamp(89px, 13vw, 109px);
+                width: clamp(85px, 13vw, 104px);
+                height: clamp(116px, 16.9vw, 142px);
                 flex-shrink: 0;
                 aspect-ratio: 154 / 210;
+                margin-top: -130px;
             }
 
             .quote-flower-right {
@@ -944,8 +940,8 @@
             }
 
             .portrait-frame {
-                width: clamp(95px, 16vw, 150px);
-                height: clamp(95px, 16vw, 150px);
+                width: clamp(120px, 20vw, 180px);
+                height: clamp(120px, 20vw, 180px);
             }
 
             .portrait-frame img {
@@ -976,7 +972,8 @@
 
             .quote-candle {
                 gap: 0.3rem;
-                margin-top: -50px;
+                margin-top: -40px;
+                align-self: center;
             }
         }
 
@@ -1013,9 +1010,10 @@
             }
 
             .quote-flower-left {
-                width: clamp(55px, 8vw, 70px);
-                height: clamp(75px, 11vw, 95px);
+                width: clamp(72px, 10.4vw, 91px);
+                height: clamp(98px, 14.3vw, 124px);
                 aspect-ratio: 154 / 210;
+                margin-top: -130px;
             }
 
             .quote-flower-right {
@@ -1036,8 +1034,8 @@
             }
 
             .portrait-frame {
-                width: clamp(85px, 15vw, 140px);
-                height: clamp(85px, 15vw, 140px);
+                width: clamp(110px, 18vw, 160px);
+                height: clamp(110px, 18vw, 160px);
             }
 
             .portrait-frame img {
@@ -1070,13 +1068,15 @@
 
             .quote-candle {
                 gap: 0.25rem;
-                margin-top: 0px;
+                margin-top: -40px;
+                align-self: center;
             }
 
             .candle-text {
                 font-size: clamp(7px, 1.4vw, 10px);
-                font-family: 'Dancing Script', cursive;
+                font-family: 'Cormorant Garamond', serif;
                 font-weight: 700;
+                font-style: normal;
                 width: 85%;
                 max-width: 85%;
                 padding: 0 1px;
@@ -1085,24 +1085,16 @@
             .candle-text div:first-child {
                 font-size: clamp(8px, 1.6vw, 11px);
                 margin-bottom: clamp(1px, 0.2vw, 2px);
-                font-family: 'Dancing Script', cursive;
-            }
-
-            /* GESTERN, HEUTE, MORGEN, IMMER - normal fancy font, bold, not italic */
-            .candle-text div:nth-child(2),
-            .candle-text div:nth-child(3),
-            .candle-text div:nth-child(4),
-            .candle-text div:nth-child(5) {
                 font-family: 'Cormorant Garamond', serif;
-                font-style: normal;
                 font-weight: 700;
-                font-size: clamp(6px, 1.2vw, 9px);
+                font-style: normal;
             }
 
             .candle-text div:last-child {
-                margin-top: clamp(2px, 0.4vw, 3px);
                 font-size: clamp(8px, 1.6vw, 11px);
-                font-family: 'Dancing Script', cursive;
+                font-family: 'Cormorant Garamond', serif;
+                font-weight: 700;
+                font-style: normal;
             }
 
             .section-card {
@@ -1176,25 +1168,18 @@
                     aber ewig spürbar im Herzen.</p>
                 </div>
             </div>
-            <div class="quote-flower-right">
-                <img src="./photos/Right-Blumen.png" alt="Right Flower">
-            </div>
             <div class="quote-candle">
                 <div class="candle-container is-off" id="candleToggle">
                     <div class="candle-body">
                         <div class="candle-text">
-                            <div>Du fehlst</div>
-                            <div>GESTERN.</div>
-                            <div>HEUTE.</div>
-                            <div>MORGEN.</div>
-                            <div>IMMER.</div>
-                            <div>Petra</div>
+                            <div>Klicken</div>
+                            <div>Hier</div>
                         </div>
                         <div class="wick"></div>
                         <div class="flame"></div>
                     </div>
                 </div>
-                <p class="hint" id="candleHint">Kerzen<br>anzuzünden</p>
+                <p class="hint" id="candleHint" style="display: none;"></p>
             </div>
         </div>
 
@@ -1231,41 +1216,15 @@
         </footer>
     </div>
 
-    <!-- Background music for candle -->
-    <audio id="candleMusic" loop preload="auto">
-        <source src="./photos/music/condolence-music.mp3" type="audio/mpeg">
-        <source src="./photos/music/condolence-music.ogg" type="audio/ogg">
-        Your browser does not support the audio element.
-    </audio>
-
     <script>
         const candle = document.getElementById('candleToggle');
         const hint = document.getElementById('candleHint');
-        const candleMusic = document.getElementById('candleMusic');
         let isLit = false;
-
-        // Set music volume (0.0 to 1.0, 0.3 = 30% volume for background music)
-        if (candleMusic) {
-            candleMusic.volume = 0.3;
-        }
 
         candle.addEventListener('click', () => {
             isLit = !isLit;
             candle.classList.toggle('is-off', !isLit);
-            hint.innerHTML = isLit ? '' : 'Kerzen<br>anzuzünden';
-            
-            // Play/pause music based on candle state
-            if (candleMusic) {
-                if (isLit) {
-                    candleMusic.play().catch(error => {
-                        console.log('Audio play failed:', error);
-                        // Some browsers require user interaction before playing audio
-                    });
-                } else {
-                    candleMusic.pause();
-                    candleMusic.currentTime = 0; // Reset to beginning
-                }
-            }
+            hint.style.display = 'none';
         });
 
         const form = document.getElementById('condolenceForm');

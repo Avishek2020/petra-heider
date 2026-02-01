@@ -50,6 +50,11 @@
         header {
             text-align: center;
             margin-bottom: 0.25rem;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
         }
 
         .top-ornament {
@@ -66,6 +71,8 @@
             margin-bottom: 0.1rem;
             color: #999999;
             line-height: 1.1;
+            text-align: center;
+            width: 100%;
         }
 
         .dates {
@@ -74,6 +81,8 @@
             font-style: normal;
             color: #999999;
             margin-bottom: 0.35rem;
+            text-align: center;
+            width: 100%;
         }
 
         /* Memorial Row Layout */
@@ -130,6 +139,7 @@
             margin: 0 auto;
             box-sizing: border-box;
             overflow: hidden;
+            align-self: center;
         }
 
         .portrait-frame img {
@@ -454,8 +464,8 @@
             flex-shrink: 0;
             gap: 2rem;
             text-align: center;
-            margin-left: 1.5rem;
-            margin-right: 1.5rem;
+            margin-left: 0;
+            margin-right: 0;
             align-self: center;
         }
 
@@ -469,6 +479,7 @@
             padding: 0 1rem;
             width: 100%;
             max-width: 100%;
+            margin-bottom: 2rem;
         }
 
         .quote-text p {
@@ -480,7 +491,7 @@
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 40px;
+            margin-top: 0px;
             flex-shrink: 0;
             align-self: center;
             margin-left: 2.375rem;
@@ -718,6 +729,10 @@
                 padding: 1rem 1rem;
             }
 
+            header {
+                padding: 0 1rem;
+            }
+
             .quote-section {
                 gap: 0;
                 padding: 0 1rem;
@@ -791,11 +806,12 @@
                 font-size: 0.85rem;
                 padding: 0 0.5rem;
                 margin-left: 20px;
+                margin-bottom: 1.5rem;
             }
 
             .quote-candle {
                 gap: 0.4rem;
-                margin-top: -60px;
+                margin-top: 0px;
                 align-self: center;
             }
 
@@ -812,6 +828,13 @@
 
             .section-card {
                 padding: 1rem 0.75rem;
+            }
+
+            .section-card::before {
+                font-size: 1rem;
+                letter-spacing: 0.5rem;
+                margin-bottom: 1rem;
+                padding-top: 1rem;
             }
 
             .condolence-form {
@@ -957,6 +980,7 @@
             .quote-text {
                 font-size: 0.8rem;
                 padding: 0 0.25rem;
+                margin-bottom: 1.5rem;
             }
 
             .candle-container {
@@ -972,7 +996,7 @@
 
             .quote-candle {
                 gap: 0.3rem;
-                margin-top: -40px;
+                margin-top: -60px;
                 align-self: center;
             }
         }
@@ -980,6 +1004,10 @@
         @media (max-width: 480px) {
             .container {
                 padding: 0.5rem 0.5rem;
+            }
+
+            header {
+                padding: 0 0.5rem;
             }
 
             .quote-section {
@@ -1053,6 +1081,7 @@
                 padding: 0 0.25rem;
                 line-height: 1.3;
                 margin-left: 20px;
+                margin-bottom: 1.5rem;
             }
 
             .candle-container {
@@ -1068,7 +1097,7 @@
 
             .quote-candle {
                 gap: 0.25rem;
-                margin-top: -40px;
+                margin-top: -60px;
                 align-self: center;
             }
 
@@ -1100,6 +1129,7 @@
             .section-card {
                 padding: 0.85rem 0.6rem;
             }
+
 
             .condolence-form {
                 gap: 0.4rem;
@@ -1242,10 +1272,27 @@
             item.className = 'comment-item';
             const ortStr = (msg.ort != null && String(msg.ort).trim()) ? String(msg.ort).trim() : '';
             const ortHtml = ortStr ? ` · ${escapeHtml(ortStr)}` : '';
-            const relStr = (msg.Beziehung != null && String(msg.Beziehung).trim()) 
-                ? String(msg.Beziehung).trim() 
-                : ((msg.beziehung != null && String(msg.beziehung).trim()) ? String(msg.beziehung).trim() : '');
+            
+            // Check for beziehung in multiple possible formats (case-insensitive)
+            let relStr = '';
+            // Check Beziehung (capital B - from server)
+            if (msg.Beziehung !== null && msg.Beziehung !== undefined && msg.Beziehung !== '' && String(msg.Beziehung).trim() !== '') {
+                relStr = String(msg.Beziehung).trim();
+            }
+            // Check beziehung (lowercase - from localStorage)
+            else if (msg.beziehung !== null && msg.beziehung !== undefined && msg.beziehung !== '' && String(msg.beziehung).trim() !== '') {
+                relStr = String(msg.beziehung).trim();
+            }
+            
             const relHtml = relStr ? ` · ${escapeHtml(relStr)}` : '';
+            
+            // Debug logging
+            if (relStr) {
+                console.log('Rendering message with beziehung:', { name: msg.name, beziehung: msg.beziehung, Beziehung: msg.Beziehung, relStr });
+            } else {
+                console.log('Rendering message without beziehung:', { name: msg.name, beziehung: msg.beziehung, Beziehung: msg.Beziehung });
+            }
+            
             item.innerHTML = `
                 <div class="comment-body">
                     <div class="comment-meta">
@@ -1309,6 +1356,8 @@
             const message = document.getElementById('message').value.trim();
             
             console.log('Form values:', { name, ort, beziehung, message });
+            console.log('Beziehung input element:', beziehungInput);
+            console.log('Beziehung value:', beziehung);
             
             if (!name || !message) {
                 alert('Bitte füllen Sie mindestens die Felder "Name" und "Ihre/Deine Worte" aus.');
@@ -1316,7 +1365,8 @@
             }
 
             const date = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
-            const newMsg = { name, ort, beziehung, message, date };
+            // Include beziehung in both formats for compatibility
+            const newMsg = { name, ort, beziehung, Beziehung: beziehung, message, date };
 
             const prevText = submitBtn.textContent;
             submitBtn.disabled = true;
@@ -1347,6 +1397,7 @@
 
             submitBtn.disabled = false;
             submitBtn.textContent = prevText;
+            console.log('Saving local message:', newMsg);
             saveLocalMessage(newMsg);
             list.prepend(renderMessage(newMsg));
             form.reset();
